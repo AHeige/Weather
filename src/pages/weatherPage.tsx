@@ -46,7 +46,7 @@ const WeatherPage = () => {
           <Grid item>
             <AcUnitIcon />
           </Grid>
-          <Grid item xs={10} lg={3}>
+          <Grid item xs={6} lg={3}>
             <CitySearch setCity={setCity} />
           </Grid>
         </Grid>
@@ -57,7 +57,7 @@ const WeatherPage = () => {
         justifyContent='center'
         alignItems='center'
         style={{ marginTop: "8em" }}>
-        <Grid item xs={8}>
+        <Grid item xs={10} lg={4}>
           {city && <WeatherCard city={city} />}
         </Grid>
       </Grid>

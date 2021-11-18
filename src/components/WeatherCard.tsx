@@ -9,10 +9,7 @@ import getWeather from "../services/weatherService"
 //Material-UI
 import Card from "@mui/material/Card"
 import CardHeader from "@mui/material/CardHeader"
-import CardContent from "@mui/material/CardContent"
-//import CardMedia from "@mui/material/CardMedia"
-import CardActionArea from "@mui/material/CardActionArea"
-//import CardActions from "@mui/material/CardActions"
+import Grid from "@mui/material/Grid"
 
 //Components
 import WeatherCardContent from "./WeatherCardContent"
@@ -30,19 +27,19 @@ const WeatherCard = (city: any) => {
 
   const handleSearch = async (chosenCity: any) => {
     setIsLoading(true)
-    let weather = await weatherData
+    /*     let weather = await weatherData
     if (weather) {
       setWeather(weather)
       setIsDataFound(true)
-    }
-    /*     let weather = await getWeather(chosenCity)
+    } */
+    let weather = await getWeather(chosenCity)
     if (weather.data) {
       setWeather(weather.data)
       setIsLoading(false)
       setIsDataFound(true)
     } else if (weather.error) {
       console.error(weather.error)
-    } */
+    }
   }
 
   return (
