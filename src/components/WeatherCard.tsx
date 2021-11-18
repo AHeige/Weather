@@ -1,13 +1,10 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
 //Constants
 import weatherData from "../constants/weatherTest"
 
 //Services
-import weatherService from "../services/weatherService"
-
-//Utils
-import { resolveWeatherData } from "../utils/weather"
+import getWeather from "../services/weatherService"
 
 //Material-UI
 import Card from "@mui/material/Card"
@@ -17,40 +14,37 @@ import CardContent from "@mui/material/CardContent"
 import CardActionArea from "@mui/material/CardActionArea"
 //import CardActions from "@mui/material/CardActions"
 
-const WeatherCard = (city: any, weather: any, isLoading: boolean) => {
-  const {
-    weatherDescription,
-    temp,
-    tempMin,
-    tempMax,
-    feelsLike,
-    sunRise,
-    sunSet,
-  } = resolveWeatherData(weather)
+//Components
+import WeatherCardContent from "./WeatherCardContent"
+
+const WeatherCard = (city: any) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [weather, setWeather] = useState({})
+  const [isDataFound, setIsDataFound] = useState<boolean>(false)
 
   useEffect(() => {
     if (city) {
-      console.log(city.city)
-      /* 
-        setIsLoading(true)
-        let weather = await weatherService(chosenCity)
-      if (weather.status === 200) {
-        setIsLoading(false)
-        console.log(weather)
-      } else console.log(weather.error) */
+      handleSearch(Object.values(city).toString())
     }
   }, [city])
+
+  const handleSearch = async (chosenCity: any) => {
+    setIsLoading(true)
+    let weather = await getWeather(chosenCity)
+    if (weather.data) {
+      setWeather(weather.data)
+      setIsLoading(false)
+      setIsDataFound(true)
+    } else if (weather.error) {
+      console.error(weather.error)
+    }
+  }
 
   return (
     <Card>
       <CardActionArea>
         <CardHeader title={city.city} />
-
-        <Card>
-          <CardContent>{weatherDescription}</CardContent>
-          <CardContent>{temp}</CardContent>
-          <CardContent>{temp}</CardContent>
-        </Card>
+        {isDataFound && <WeatherCardContent weather={weather} />}
       </CardActionArea>
     </Card>
   )
