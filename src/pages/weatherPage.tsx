@@ -36,7 +36,15 @@ const WeatherPage = () => {
           spacing={2}>
           <Grid item>
             <WbSunnyIcon />
+          </Grid>
+          <Grid item>
+            <CloudIcon />
+          </Grid>
+          <Grid item>
             <LooksIcon />
+          </Grid>
+          <Grid item>
+            <AcUnitIcon />
           </Grid>
           <Grid item xs={10} lg={3}>
             <CitySearch setCity={setCity} />
