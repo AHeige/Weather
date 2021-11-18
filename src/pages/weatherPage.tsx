@@ -7,8 +7,6 @@ import WeatherCard from "../components/WeatherCard"
 //Material-UI
 import Grid from "@mui/material/Grid"
 import AppBar from "@mui/material/AppBar"
-import Card from "@mui/material/Card"
-import CardHeader from "@mui/material/CardHeader"
 import WbSunnyIcon from "@mui/icons-material/WbSunny"
 import CloudIcon from "@mui/icons-material/Cloud"
 import LooksIcon from "@mui/icons-material/Looks"

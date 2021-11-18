@@ -3,7 +3,6 @@ import React from "react"
 //Material-ui
 import Grid from "@mui/material/Grid"
 import Card from "@mui/material/Card"
-import CardHeader from "@mui/material/CardHeader"
 import CardContent from "@mui/material/CardContent"
 import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat"
 import ExposureIcon from "@mui/icons-material/Exposure"
@@ -27,13 +26,13 @@ const WeatherCardContent = (weather: any) => {
   const classes = useStyles()
 
   const {
-    weatherDescription,
+    /*     weatherDescription, */
     temp,
     tempMin,
     tempMax,
     feelsLike,
-    sunRise,
-    sunSet,
+    /*     sunRise,
+    sunSet, */
   } = resolveWeatherData(weather)
 
   return (
