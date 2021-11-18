@@ -5,10 +5,10 @@ export const resolveWeatherData = (weather: any) => {
 
   const resolveWeather = {
     weatherType: weatherObject.weather.main,
-    weatherDescription: weatherObject.description,
+    weatherDescription: weatherObject.weather[0].description,
     temp: weatherObject.main.temp,
     tempMin: weatherObject.main.temp_min,
-    tempMax: weatherObject.main.max,
+    tempMax: weatherObject.main.temp_max,
     feelsLike: weatherObject.main.feels_like,
     sunRise: weatherObject.sys.sunrise,
     sunSet: weatherObject.sys.sunSet,

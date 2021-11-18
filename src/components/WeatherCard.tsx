@@ -30,22 +30,25 @@ const WeatherCard = (city: any) => {
 
   const handleSearch = async (chosenCity: any) => {
     setIsLoading(true)
-    let weather = await getWeather(chosenCity)
+    let weather = await weatherData
+    if (weather) {
+      setWeather(weather)
+      setIsDataFound(true)
+    }
+    /*     let weather = await getWeather(chosenCity)
     if (weather.data) {
       setWeather(weather.data)
       setIsLoading(false)
       setIsDataFound(true)
     } else if (weather.error) {
       console.error(weather.error)
-    }
+    } */
   }
 
   return (
     <Card>
-      <CardActionArea>
-        <CardHeader title={city.city} />
-        {isDataFound && <WeatherCardContent weather={weather} />}
-      </CardActionArea>
+      <CardHeader title={city.city} />
+      {isDataFound && <WeatherCardContent weather={weather} />}
     </Card>
   )
 }
