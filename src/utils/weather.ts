@@ -4,17 +4,17 @@ export const resolveWeatherData = (weather: any) => {
   console.log(weatherObject)
 
   const resolveWeather = {
-    weatherType: <string>weatherObject.weather[0].main,
+    weatherType: weatherObject.weather[0].main,
     weatherDescription: resolveWeatherDescription(
-      <string>weatherObject.weather[0].description
+      weatherObject.weather[0].description
     ),
-    temp: <number>weatherObject.main.temp,
-    tempMin: <number>weatherObject.main.temp_min,
-    tempMax: <number>weatherObject.main.temp_max,
-    feelsLike: <number>weatherObject.main.feels_like,
-    sunRise: <number>weatherObject.sys.sunrise,
-    sunSet: <number>weatherObject.sys.sunSet,
-    weatherIcon: resolveWeatherIcon(<string>weatherObject.weather[0].icon),
+    temp: weatherObject.main.temp,
+    tempMin: weatherObject.main.temp_min,
+    tempMax: weatherObject.main.temp_max,
+    feelsLike: weatherObject.main.feels_like,
+    sunRise: weatherObject.sys.sunrise,
+    sunSet: weatherObject.sys.sunSet,
+    weatherIcon: resolveWeatherIcon(weatherObject.weather[0].icon),
   }
 
   return resolveWeather

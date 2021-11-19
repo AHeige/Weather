@@ -3,7 +3,6 @@ import React from "react"
 //Material-ui
 import Grid from "@mui/material/Grid"
 import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
 import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat"
 import ExposureIcon from "@mui/icons-material/Exposure"
 import AccessTimeIcon from "@mui/icons-material/AccessTime"
@@ -39,7 +38,7 @@ const WeatherCardContent = (weather: any) => {
     feelsLike,
     /*     sunRise,
     sunSet, */
-    weatherType,
+    //weatherType,
     weatherIcon,
     weatherDescription,
   } = resolveWeatherData(weather)
@@ -69,7 +68,10 @@ const WeatherCardContent = (weather: any) => {
             alignItems='center'>
             <Grid item>
               <Tooltip arrow title={weatherDescription} placement='top'>
-                <img className={classes.weatherIcon} src={weatherIcon}></img>
+                <img
+                  alt={weatherDescription}
+                  className={classes.weatherIcon}
+                  src={weatherIcon}></img>
               </Tooltip>
             </Grid>
             <Grid item style={{ paddingLeft: "1em" }}>
