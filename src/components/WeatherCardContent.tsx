@@ -47,7 +47,12 @@ const WeatherCardContent = (weather: any) => {
   return (
     <Fade timeout={1000}>
       <>
-        <Grid container direction='row' alignItems='center' spacing={4}>
+        <Grid
+          container
+          direction='row'
+          alignItems='center'
+          //spacing={1}
+          style={{ marginLeft: "1em" }}>
           <Grid item>
             <AccessTimeIcon />
           </Grid>
