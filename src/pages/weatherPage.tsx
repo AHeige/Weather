@@ -55,7 +55,7 @@ const WeatherPage = () => {
         justifyContent='center'
         alignItems='center'
         style={{ marginTop: "8em" }}>
-        <Grid item xs={10} lg={4}>
+        <Grid item xs={12} lg={6}>
           {city && <WeatherCard city={city} />}
         </Grid>
       </Grid>
