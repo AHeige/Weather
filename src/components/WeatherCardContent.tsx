@@ -48,10 +48,11 @@ const WeatherCardContent = (weather: any) => {
       <>
         <Grid
           container
-          direction='row'
-          alignItems='center'
+          direction="row"
+          alignItems="center"
           //spacing={1}
-          style={{ marginLeft: "1em" }}>
+          style={{ marginLeft: "1em" }}
+        >
           <Grid item>
             <AccessTimeIcon />
           </Grid>
@@ -62,16 +63,18 @@ const WeatherCardContent = (weather: any) => {
         <Card style={{ padding: "1em" }}>
           <Grid
             container
-            direction='row'
+            direction="row"
             spacing={4}
-            justifyContent='flex-start'
-            alignItems='center'>
+            justifyContent="flex-start"
+            alignItems="center"
+          >
             <Grid item>
-              <Tooltip arrow title={weatherDescription} placement='top'>
+              <Tooltip arrow title={weatherDescription} placement="top">
                 <img
                   alt={weatherDescription}
                   className={classes.weatherIcon}
-                  src={weatherIcon}></img>
+                  src={weatherIcon}
+                ></img>
               </Tooltip>
             </Grid>
             <Grid item style={{ paddingLeft: "1em" }}>
@@ -82,7 +85,7 @@ const WeatherCardContent = (weather: any) => {
               </span>
             </Grid>
             <Grid item>
-              <Tooltip title='Minus / Max' arrow placement='top'>
+              <Tooltip title="Minus / Max" arrow placement="top">
                 <ExposureIcon />
               </Tooltip>
               <span className={classes.weatherText}>

@@ -8,7 +8,7 @@ export const resolveWeatherData = (weather: any) => {
     weatherDescription: resolveWeatherDescription(
       weatherObject.weather[0].description
     ),
-    temp: weatherObject.main.temp,
+    temp: Math.round(weatherObject.main.temp),
     tempMin: weatherObject.main.temp_min,
     tempMax: weatherObject.main.temp_max,
     feelsLike: weatherObject.main.feels_like,
@@ -56,6 +56,7 @@ const resolveWeatherDescription = (weatherDescription: string) => {
     "few clouds": "Några moln",
     "scattered clouds": "Spridda moln",
     "broken clouds": "Överskuggade moln",
+    "overcast clouds": "Spridda moln",
     "shower rain": "Regnskur",
     rain: "Regn",
     thunderstorm: "Åskväder",

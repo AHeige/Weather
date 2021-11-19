@@ -18,46 +18,47 @@ const WeatherPage = () => {
   return (
     <>
       <AppBar
-        position='fixed'
+        position="fixed"
         elevation={0}
         style={{
-          backgroundColor: "#fff",
           color: "#000000",
           padding: "1em",
           justifyContent: "center",
-        }}>
+        }}
+        color="transparent"
+      >
         <Grid
           container
-          direction='row'
-          justifyContent='center'
-          alignItems='center'
-          spacing={2}>
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+        >
           <Grid item>
-            <WbSunnyIcon />
+            <WbSunnyIcon style={{ color: "#fff" }} />
           </Grid>
           <Grid item>
-            <CloudIcon />
+            <CloudIcon style={{ color: "#fff" }} />
           </Grid>
           <Grid item>
-            <LooksIcon />
+            <LooksIcon style={{ color: "#fff" }} />
           </Grid>
           <Grid item>
-            <AcUnitIcon />
+            <AcUnitIcon style={{ color: "#fff" }} />
           </Grid>
-          <Grid item xs={6} lg={3}>
+          <Grid item xs={6} lg={1.8} style={{ maxWidth: "13em" }}>
             <CitySearch setCity={setCity} />
           </Grid>
         </Grid>
       </AppBar>
       <Grid
         container
-        direction='row'
-        justifyContent='center'
-        alignItems='center'
-        style={{ marginTop: "8em" }}>
-        <Grid item xs={12} lg={6}>
-          {city && <WeatherCard city={city} />}
-        </Grid>
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        style={{ marginTop: "6em" }}
+      >
+        {city && <WeatherCard city={city} />}
       </Grid>
     </>
   )

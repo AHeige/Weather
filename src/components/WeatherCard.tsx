@@ -6,11 +6,11 @@ import React, { useEffect, useState } from "react"
 import getWeather from "../services/weatherService"
 
 //Material-UI
-import Card from "@mui/material/Card"
-import CardHeader from "@mui/material/CardHeader"
+import Grid from "@mui/material/Grid"
 
 //Components
-import WeatherCardContent from "./WeatherCardContent"
+//import WeatherCardContent from "./WeatherCardContent"
+import WeatherContentSimple from "./WeatherContentSimple"
 
 const WeatherCard = (city: any) => {
   const [weather, setWeather] = useState({})
@@ -38,10 +38,15 @@ const WeatherCard = (city: any) => {
   }
 
   return (
-    <Card>
-      <CardHeader title={city.city} />
-      {isDataFound && <WeatherCardContent weather={weather} />}
-    </Card>
+    <>
+      {/*       <Grid item xs={12} style={{ fontSize: "2.5em" }}>
+        {city.city}
+      </Grid> */}
+      <Grid item>
+        {isDataFound && <WeatherContentSimple weather={weather} />}
+        {/* {isDataFound && <WeatherCardContent weather={weather} />} */}
+      </Grid>
+    </>
   )
 }
 
