@@ -16,22 +16,22 @@ const useStyles = makeStyles(() => ({
     },
   },
   inputRoot: {
-    color: "#fff",
-    borderColor: "#fff",
+    color: "#000000",
+    borderColor: "#000000",
     '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
       // Default left padding is 6px
       paddingLeft: 26,
-      borderColor: "transparent",
+      borderColor: "#000000",
     },
     "& .MuiOutlinedInput-notchedOutline": {
       borderColor: "transparent",
       //borderBottomColor: "#fff",
     },
     "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "transparent",
+      borderColor: "#000000",
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "transparent",
+      borderColor: "#000000",
     },
   },
 }))
@@ -43,11 +43,7 @@ const CitySearch = ({ setCity }: any) => {
     <>
       <Autocomplete
         renderInput={(params) => (
-          <TextField
-            style={{ color: "#fff" }}
-            {...params}
-            placeholder="Sök stad"
-          />
+          <TextField {...params} placeholder='Sök stad' />
         )}
         options={cities}
         onChange={(e, value) => setCity(value)}
