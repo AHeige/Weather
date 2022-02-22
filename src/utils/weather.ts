@@ -1,8 +1,6 @@
 export const resolveWeatherData = (weather: any) => {
   const weatherObject = weather.weather
 
-  console.log(weatherObject)
-
   const resolveWeather = {
     weatherType: weatherObject.weather[0].main,
     weatherDescription: weatherObject.weather[0].description,
