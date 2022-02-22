@@ -9,7 +9,6 @@ import getWeather from "../services/weatherService"
 import Grid from "@mui/material/Grid"
 
 //Components
-//import WeatherCardContent from "./WeatherCardContent"
 import WeatherContentSimple from "./WeatherContentSimple"
 
 const WeatherCard = (city: any) => {
@@ -23,11 +22,6 @@ const WeatherCard = (city: any) => {
   }, [city])
 
   const handleSearch = async (chosenCity: any) => {
-    /*     let weather = await weatherData
-    if (weather) {
-      setWeather(weather)
-      setIsDataFound(true)
-    } */
     let weather = await getWeather(chosenCity)
     if (weather.data) {
       setWeather(weather.data)
@@ -39,12 +33,8 @@ const WeatherCard = (city: any) => {
 
   return (
     <>
-      {/*       <Grid item xs={12} style={{ fontSize: "2.5em" }}>
-        {city.city}
-      </Grid> */}
       <Grid item>
         {isDataFound && <WeatherContentSimple weather={weather} />}
-        {/* {isDataFound && <WeatherCardContent weather={weather} />} */}
       </Grid>
     </>
   )

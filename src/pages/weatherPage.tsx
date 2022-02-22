@@ -3,6 +3,7 @@ import React, { useState } from "react"
 //Components
 import CitySearch from "../components/CitySearch"
 import WeatherCard from "../components/WeatherCard"
+import Mountains from "../assets/mountains.svg"
 
 //Material-UI
 import Grid from "@mui/material/Grid"
@@ -14,9 +15,18 @@ import AcUnitIcon from "@mui/icons-material/AcUnit"
 
 const WeatherPage = () => {
   const [city, setCity] = useState<string>("")
+  const [weatherType, setWeatherType] = useState<string>("")
 
   return (
-    <>
+    <Grid
+      container
+      style={{
+        backgroundImage: `url(${Mountains})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+      }}>
       <AppBar
         position='fixed'
         elevation={0}
@@ -24,6 +34,7 @@ const WeatherPage = () => {
           color: "#000000",
           padding: "1em",
           justifyContent: "center",
+          opacity: "0.75",
         }}
         color='inherit'>
         <Grid
@@ -54,10 +65,13 @@ const WeatherPage = () => {
         direction='row'
         justifyContent='center'
         alignItems='center'
-        style={{ marginTop: "6em" }}>
-        {city && <WeatherCard city={city} />}
+        style={{
+          marginTop: "6em",
+          //backgroundImage: `url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*)`,
+        }}>
+        {city && <WeatherCard city={city} setWeatherType={setWeatherType} />}
       </Grid>
-    </>
+    </Grid>
   )
 }
 
