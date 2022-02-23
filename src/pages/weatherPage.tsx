@@ -1,8 +1,16 @@
-import React, { useState } from "react"
+import React, { useState, useContext, useEffect } from "react"
 
 //Components
 import CitySearch from "../components/CitySearch"
 import WeatherCard from "../components/WeatherCard"
+import Mountains from "../assets/mountains.svg"
+import CloudyDay from "../assets/WeatherPics/Cloudy/CloudyDay.jpg"
+
+//Contexts
+import weatherContext from "../contexts/weatherContext"
+
+//Utils
+import weatherImg from "../utils/weatherImg"
 
 //Material-UI
 import Grid from "@mui/material/Grid"
@@ -14,37 +22,47 @@ import AcUnitIcon from "@mui/icons-material/AcUnit"
 
 const WeatherPage = () => {
   const [city, setCity] = useState<string>("")
+  const { weatherType } = useContext(weatherContext)
 
   return (
-    <>
+    <Grid
+      container
+      style={{
+        backgroundImage: weatherType
+          ? `url(${weatherImg(weatherType)})`
+          : `url(${Mountains})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+      }}>
       <AppBar
-        position="fixed"
+        position='fixed'
         elevation={0}
         style={{
           color: "#000000",
           padding: "1em",
           justifyContent: "center",
+          opacity: "0.75",
         }}
-        color="transparent"
-      >
+        color='inherit'>
         <Grid
           container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-        >
+          direction='row'
+          justifyContent='center'
+          alignItems='center'
+          spacing={2}>
           <Grid item>
-            <WbSunnyIcon style={{ color: "#fff" }} />
+            <WbSunnyIcon />
           </Grid>
           <Grid item>
-            <CloudIcon style={{ color: "#fff" }} />
+            <CloudIcon />
           </Grid>
           <Grid item>
-            <LooksIcon style={{ color: "#fff" }} />
+            <LooksIcon />
           </Grid>
           <Grid item>
-            <AcUnitIcon style={{ color: "#fff" }} />
+            <AcUnitIcon />
           </Grid>
           <Grid item xs={6} lg={1.8} style={{ maxWidth: "13em" }}>
             <CitySearch setCity={setCity} />
@@ -53,14 +71,16 @@ const WeatherPage = () => {
       </AppBar>
       <Grid
         container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        style={{ marginTop: "6em" }}
-      >
+        direction='row'
+        justifyContent='center'
+        //alignItems='center'
+        style={{
+          marginTop: "6em",
+          //backgroundImage: `url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*)`,
+        }}>
         {city && <WeatherCard city={city} />}
       </Grid>
-    </>
+    </Grid>
   )
 }
 

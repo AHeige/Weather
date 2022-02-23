@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 
 //Constants import weatherData from "../constants/weatherTest"
 
@@ -6,28 +6,25 @@ import React, { useEffect, useState } from "react"
 import getWeather from "../services/weatherService"
 
 //Material-UI
-import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 //Components
-//import WeatherCardContent from "./WeatherCardContent"
 import WeatherContentSimple from "./WeatherContentSimple"
+import { Typography } from "@mui/material"
 
 const WeatherCard = (city: any) => {
   const [weather, setWeather] = useState({})
   const [isDataFound, setIsDataFound] = useState<boolean>(false)
 
+  city = Object.values(city).toString()
+
   useEffect(() => {
     if (city) {
-      handleSearch(Object.values(city).toString())
+      handleSearch(city)
     }
   }, [city])
 
   const handleSearch = async (chosenCity: any) => {
-    /*     let weather = await weatherData
-    if (weather) {
-      setWeather(weather)
-      setIsDataFound(true)
-    } */
     let weather = await getWeather(chosenCity)
     if (weather.data) {
       setWeather(weather.data)
@@ -39,13 +36,17 @@ const WeatherCard = (city: any) => {
 
   return (
     <>
-      {/*       <Grid item xs={12} style={{ fontSize: "2.5em" }}>
-        {city.city}
-      </Grid> */}
-      <Grid item>
-        {isDataFound && <WeatherContentSimple weather={weather} />}
-        {/* {isDataFound && <WeatherCardContent weather={weather} />} */}
-      </Grid>
+      {isDataFound && (
+        <Card
+          style={{
+            height: "fit-content",
+            alignContent: "left",
+            width: "60vh",
+          }}>
+          <Typography>{city}</Typography>
+          <WeatherContentSimple weather={weather} />
+        </Card>
+      )}
     </>
   )
 }
