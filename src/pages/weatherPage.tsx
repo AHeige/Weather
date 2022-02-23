@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext } from "react"
 
 //Components
 import CitySearch from "../components/CitySearch"
 import WeatherCard from "../components/WeatherCard"
 import Mountains from "../assets/mountains.svg"
-import CloudyDay from "../assets/WeatherPics/Cloudy/CloudyDay.jpg"
+//import CloudyDay from "../assets/WeatherPics/Cloudy/CloudyDay.jpg"
 
 //Contexts
 import weatherContext from "../contexts/weatherContext"
