@@ -5,7 +5,6 @@ import weatherContext from "../contexts/weatherContext"
 
 //Material-ui
 import Grid from "@mui/material/Grid"
-import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import { makeStyles } from "@mui/styles"
 
@@ -35,8 +34,8 @@ const WeatherContentSimple = (weather: any) => {
     tempMin,
     tempMax,
     feelsLike,
-    sunRise,
-    sunSet,
+    //sunRise,
+    //sunSet,
     weatherType,
     wind,
     weatherIcon,
