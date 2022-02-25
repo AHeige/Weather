@@ -12,6 +12,8 @@ export const resolveWeatherData = (weather: any) => {
     sunSet: weatherObject.sys.sunSet,
     wind: weatherObject.wind.speed + "m/s",
     weatherIcon: resolveWeatherIcon(weatherObject.weather[0].icon),
+    city: weatherObject.name,
+    country: weatherObject.sys.country,
   }
 
   return resolveWeather

@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 
 //Constants import weatherData from "../constants/weatherTest"
 
@@ -7,12 +7,22 @@ import getWeather from "../services/weatherService"
 
 //Material-UI
 import Card from "@mui/material/Card"
+import CardHeader from "@mui/material/CardHeader"
+import CardMedia from "@mui/material/CardMedia"
+import CardContent from "@mui/material/CardContent"
 
 //Components
 import WeatherContentSimple from "./WeatherContentSimple"
-import { Typography } from "@mui/material"
+
+//Contexts
+import weatherContext from "../contexts/weatherContext"
+
+//Utils
+import weatherImg from "../utils/weatherImg"
 
 const WeatherCard = (city: any) => {
+  const { weatherType } = useContext(weatherContext)
+
   const [weather, setWeather] = useState({})
   const [isDataFound, setIsDataFound] = useState<boolean>(false)
 
@@ -30,9 +40,12 @@ const WeatherCard = (city: any) => {
       setWeather(weather.data)
       setIsDataFound(true)
     } else if (weather.error) {
+      setIsDataFound(false)
       console.error(weather.error)
     }
   }
+
+  console.log(weatherImg(weatherType))
 
   return (
     <>
@@ -42,8 +55,9 @@ const WeatherCard = (city: any) => {
             height: "fit-content",
             alignContent: "left",
             width: "60vh",
-          }}>
-          <Typography>{city}</Typography>
+            textAlign: "left",
+          }}
+        >
           <WeatherContentSimple weather={weather} />
         </Card>
       )}
