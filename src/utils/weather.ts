@@ -3,9 +3,20 @@ import { countries } from "country-data"
 export const resolveWeatherData = (weather: any) => {
   const weatherObject = weather.weather
 
+  const capitalize = (str: any) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  const time = () => {
+    const today = new Date()
+    const time = today.getHours() + ":" + today.getMinutes()
+
+    return time
+  }
+
   const resolveWeather = {
     weatherType: weatherObject.weather[0].main,
-    weatherDescription: weatherObject.weather[0].description,
+    weatherDescription: capitalize(weatherObject.weather[0].description),
     temp: Math.round(weatherObject.main.temp) + "°",
     tempMin: weatherObject.main.temp_min + "°",
     tempMax: weatherObject.main.temp_max + "°",
@@ -17,6 +28,7 @@ export const resolveWeatherData = (weather: any) => {
     city: weatherObject.name,
     country: countries[weatherObject.sys.country].name,
     countryCode: weatherObject.sys.country,
+    time: time(),
   }
 
   return resolveWeather

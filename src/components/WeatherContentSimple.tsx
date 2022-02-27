@@ -46,6 +46,7 @@ const WeatherContentSimple = (weather: any) => {
     city,
     country,
     //countryCode,
+    time,
   } = resolveWeatherData(weather)
 
   useEffect(() => {
@@ -60,8 +61,13 @@ const WeatherContentSimple = (weather: any) => {
             <Typography variant={"h4"} style={{ marginRight: "1vh" }}>
               {temp}
             </Typography>
-            <Typography variant={"h6"}>{city}</Typography>
-            <Typography variant={"caption"} style={{ marginLeft: "0.2em" }}>
+            <Typography variant={"h6"} style={{ paddingTop: "0.5vw" }}>
+              {city}
+            </Typography>
+            <Typography
+              variant={"caption"}
+              style={{ marginLeft: "0.2em", paddingTop: "0.5vw" }}
+            >
               {country}
             </Typography>
           </Grid>
@@ -72,22 +78,18 @@ const WeatherContentSimple = (weather: any) => {
               style={{ width: "5.5vh", marginLeft: "1vh" }}
               alt={weatherDescription}
               //className={classes.weatherIcon}
-              src={weatherIcon}></img>
+              src={weatherIcon}
+            ></img>
           </>
         }
       />
-      <CardContent className={classes.weatherContainer}>
-        <span className={classes.weatherTextDetail}>Min {tempMin}</span>
-        <span className={classes.weatherTextDetail}>Max {tempMax}</span>
-        <span className={classes.weatherTextDetail}>
-          Feels Like {feelsLike}
-        </span>
-        <span className={classes.weatherTextDetail}>Wind {wind}</span>
-        <span
-          className={classes.weatherTextDetail}
-          style={{ textTransform: "capitalize" }}>
-          {weatherDescription}
-        </span>
+      <CardContent>
+        <Grid style={{ display: "flex" }}>
+          <Typography variant={"h6"}>{weatherDescription}</Typography>
+        </Grid>
+        <Grid style={{ display: "flex" }}>
+          <Typography variant={"h6"}>{time}</Typography>
+        </Grid>
       </CardContent>
     </>
   )
