@@ -7,18 +7,12 @@ import getWeather from "../services/weatherService"
 
 //Material-UI
 import Card from "@mui/material/Card"
-import CardHeader from "@mui/material/CardHeader"
-import CardMedia from "@mui/material/CardMedia"
-import CardContent from "@mui/material/CardContent"
 
 //Components
 import WeatherContentSimple from "./WeatherContentSimple"
 
 //Contexts
 import weatherContext from "../contexts/weatherContext"
-
-//Utils
-import weatherImg from "../utils/weatherImg"
 
 const WeatherCard = (city: any) => {
   const { weatherType } = useContext(weatherContext)
@@ -45,8 +39,6 @@ const WeatherCard = (city: any) => {
     }
   }
 
-  console.log(weatherImg(weatherType))
-
   return (
     <>
       {isDataFound && (
@@ -56,8 +48,7 @@ const WeatherCard = (city: any) => {
             alignContent: "left",
             width: "60vh",
             textAlign: "left",
-          }}
-        >
+          }}>
           <WeatherContentSimple weather={weather} />
         </Card>
       )}

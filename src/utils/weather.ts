@@ -1,3 +1,5 @@
+import { countries } from "country-data"
+
 export const resolveWeatherData = (weather: any) => {
   const weatherObject = weather.weather
 
@@ -13,7 +15,8 @@ export const resolveWeatherData = (weather: any) => {
     wind: weatherObject.wind.speed + "m/s",
     weatherIcon: resolveWeatherIcon(weatherObject.weather[0].icon),
     city: weatherObject.name,
-    country: weatherObject.sys.country,
+    country: countries[weatherObject.sys.country].name,
+    countryCode: weatherObject.sys.country,
   }
 
   return resolveWeather

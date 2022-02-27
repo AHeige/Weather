@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid"
 import CardContent from "@mui/material/CardContent"
 import CardHeader from "@mui/material/CardHeader"
 import Avatar from "@mui/material/Avatar"
+import Typography from "@mui/material/Typography"
 import { makeStyles } from "@mui/styles"
 
 //Utils
@@ -44,6 +45,7 @@ const WeatherContentSimple = (weather: any) => {
     weatherDescription,
     city,
     country,
+    //countryCode,
   } = resolveWeatherData(weather)
 
   useEffect(() => {
@@ -53,37 +55,39 @@ const WeatherContentSimple = (weather: any) => {
   return (
     <>
       <CardHeader
-        title={city + ",   " + country}
+        title={
+          <Grid container style={{ display: "flex", marginTop: "0.2em" }}>
+            <Typography variant={"h4"} style={{ marginRight: "1vh" }}>
+              {temp}
+            </Typography>
+            <Typography variant={"h6"}>{city}</Typography>
+            <Typography variant={"caption"} style={{ marginLeft: "0.2em" }}>
+              {country}
+            </Typography>
+          </Grid>
+        }
         avatar={
           <>
-            <Avatar>{temp}</Avatar>
             <img
               style={{ width: "5.5vh", marginLeft: "1vh" }}
               alt={weatherDescription}
               //className={classes.weatherIcon}
-              src={weatherIcon}
-            ></img>
+              src={weatherIcon}></img>
           </>
         }
       />
-
       <CardContent className={classes.weatherContainer}>
-        <Grid item xs={12}>
-          <span className={classes.weatherText}>{temp}</span>
-          <span className={classes.weatherTextDetail}>Min {tempMin}</span>
-          <span className={classes.weatherTextDetail}>Max {tempMax}</span>
-          <span className={classes.weatherTextDetail}>
-            Feels Like {feelsLike}
-          </span>
-          <span className={classes.weatherTextDetail}>Wind {wind}</span>
-          <span
-            className={classes.weatherTextDetail}
-            style={{ textTransform: "capitalize" }}
-          >
-            {weatherDescription}
-          </span>
-        </Grid>
-        <Grid item xs={12} style={{ marginTop: "-0.7em" }}></Grid>
+        <span className={classes.weatherTextDetail}>Min {tempMin}</span>
+        <span className={classes.weatherTextDetail}>Max {tempMax}</span>
+        <span className={classes.weatherTextDetail}>
+          Feels Like {feelsLike}
+        </span>
+        <span className={classes.weatherTextDetail}>Wind {wind}</span>
+        <span
+          className={classes.weatherTextDetail}
+          style={{ textTransform: "capitalize" }}>
+          {weatherDescription}
+        </span>
       </CardContent>
     </>
   )
