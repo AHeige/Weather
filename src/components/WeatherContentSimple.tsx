@@ -7,29 +7,12 @@ import weatherContext from "../contexts/weatherContext"
 import Grid from "@mui/material/Grid"
 import CardContent from "@mui/material/CardContent"
 import CardHeader from "@mui/material/CardHeader"
-import Avatar from "@mui/material/Avatar"
 import Typography from "@mui/material/Typography"
-import { makeStyles } from "@mui/styles"
 
 //Utils
 import { resolveWeatherData } from "../utils/weather"
 
-//Styles
-const useStyles: any = makeStyles(() => ({
-  weatherText: {
-    fontSize: "4em",
-  },
-  weatherTextDetail: {
-    fontSize: "1.5em",
-  },
-  weatherIcon: {
-    width: "6em",
-  },
-  weatherContainer: { width: "100%" },
-}))
-
 const WeatherContentSimple = (weather: any) => {
-  const classes = useStyles()
   const { setWeatherType } = useContext(weatherContext)
 
   const {
@@ -40,7 +23,7 @@ const WeatherContentSimple = (weather: any) => {
     //sunRise,
     //sunSet,
     weatherType,
-    wind,
+    //wind,
     weatherIcon,
     weatherDescription,
     city,

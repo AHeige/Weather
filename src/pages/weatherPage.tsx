@@ -15,11 +15,6 @@ import weatherImg from "../utils/weatherImg"
 //Material-UI
 import Grid from "@mui/material/Grid"
 import AppBar from "@mui/material/AppBar"
-import WbSunnyIcon from "@mui/icons-material/WbSunny"
-import CloudIcon from "@mui/icons-material/Cloud"
-import LooksIcon from "@mui/icons-material/Looks"
-import AcUnitIcon from "@mui/icons-material/AcUnit"
-import Typography from "@mui/material/Typography"
 
 const WeatherPage = () => {
   const { weatherType } = useContext(weatherContext)

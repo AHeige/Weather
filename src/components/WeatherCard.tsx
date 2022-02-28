@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 //Constants import weatherData from "../constants/weatherTest"
 
@@ -11,12 +11,7 @@ import Card from "@mui/material/Card"
 //Components
 import WeatherContentSimple from "./WeatherContentSimple"
 
-//Contexts
-import weatherContext from "../contexts/weatherContext"
-
 const WeatherCard = (city: any) => {
-  const { weatherType } = useContext(weatherContext)
-
   const [weather, setWeather] = useState({})
   const [isDataFound, setIsDataFound] = useState<boolean>(false)
 
