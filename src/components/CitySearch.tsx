@@ -1,3 +1,5 @@
+import React from "react"
+
 //Constants
 import cities from "../constants/cities"
 
@@ -43,7 +45,12 @@ const CitySearch = ({ setCity }: any) => {
     <>
       <Autocomplete
         renderInput={(params) => (
-          <TextField {...params} placeholder='Sök stad' />
+          <TextField
+            error={false}
+            helperText={""}
+            {...params}
+            placeholder="Sök stad"
+          />
         )}
         options={cities}
         onChange={(e, value) => setCity(value)}

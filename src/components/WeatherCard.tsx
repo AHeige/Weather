@@ -11,6 +11,9 @@ import Card from "@mui/material/Card"
 //Components
 import WeatherContentSimple from "./WeatherContentSimple"
 
+//context
+import weatherContext from "../contexts/weatherContext"
+
 const WeatherCard = (city: any) => {
   const [weather, setWeather] = useState({})
   const [isDataFound, setIsDataFound] = useState<boolean>(false)
@@ -44,7 +47,8 @@ const WeatherCard = (city: any) => {
             width: "30em",
             textAlign: "left",
             backgroundColor: `rgb(255,255,255,0.8)`,
-          }}>
+          }}
+        >
           <WeatherContentSimple weather={weather} />
         </Card>
       )}
