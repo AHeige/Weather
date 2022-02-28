@@ -33,7 +33,6 @@ const WeatherPage = () => {
     const appBarHeight = appBarRef.current.clientHeight
 
     setAppBarHeight(appBarHeight + 20)
-    console.log(appBarHeight)
   }, [appBarRef])
 
   return (
@@ -47,10 +46,9 @@ const WeatherPage = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         height: "100vh",
-      }}
-    >
+      }}>
       <AppBar
-        position="fixed"
+        position='fixed'
         elevation={0}
         style={{
           color: "#000000",
@@ -58,16 +56,14 @@ const WeatherPage = () => {
           justifyContent: "center",
           opacity: "0.75",
         }}
-        color="inherit"
-        ref={appBarRef}
-      >
+        color='inherit'
+        ref={appBarRef}>
         <Grid
           container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-        >
+          direction='row'
+          justifyContent='center'
+          alignItems='center'
+          spacing={2}>
           <Grid item xs={12} lg={1.8} style={{ maxWidth: "13em" }}>
             <CitySearch setCity={setCity} />
           </Grid>
@@ -76,14 +72,13 @@ const WeatherPage = () => {
 
       <Grid
         container
-        direction="row"
-        justifyContent="center"
+        direction='row'
+        justifyContent='center'
         //alignItems='center'
         style={{
           marginTop: appBarHeight,
           //backgroundImage: `url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*)`,
-        }}
-      >
+        }}>
         {city && <WeatherCard city={city} />}
       </Grid>
     </Grid>

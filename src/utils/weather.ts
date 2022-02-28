@@ -7,13 +7,6 @@ export const resolveWeatherData = (weather: any) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  const time = () => {
-    const today = new Date()
-    const time = today.getHours() + ":" + today.getMinutes()
-
-    return time
-  }
-
   const resolveWeather = {
     weatherType: weatherObject.weather[0].main,
     weatherDescription: capitalize(weatherObject.weather[0].description),
@@ -28,7 +21,6 @@ export const resolveWeatherData = (weather: any) => {
     city: weatherObject.name,
     country: countries[weatherObject.sys.country].name,
     countryCode: weatherObject.sys.country,
-    time: time(),
   }
 
   return resolveWeather

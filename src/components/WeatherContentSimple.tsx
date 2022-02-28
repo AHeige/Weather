@@ -46,7 +46,6 @@ const WeatherContentSimple = (weather: any) => {
     city,
     country,
     //countryCode,
-    time,
   } = resolveWeatherData(weather)
 
   useEffect(() => {
@@ -56,39 +55,49 @@ const WeatherContentSimple = (weather: any) => {
   return (
     <>
       <CardHeader
+        style={{ backgroundColor: `rgb(255,255,255, 0.3)` }}
         title={
           <Grid container style={{ display: "flex", marginTop: "0.2em" }}>
-            <Typography variant={"h4"} style={{ marginRight: "1vh" }}>
-              {temp}
-            </Typography>
             <Typography variant={"h6"} style={{ paddingTop: "0.5vw" }}>
               {city}
             </Typography>
             <Typography
               variant={"caption"}
-              style={{ marginLeft: "0.2em", paddingTop: "0.5vw" }}
-            >
+              style={{ marginLeft: "0.2em", paddingTop: "0.5vw" }}>
               {country}
             </Typography>
           </Grid>
         }
-        avatar={
-          <>
-            <img
-              style={{ width: "5.5vh", marginLeft: "1vh" }}
-              alt={weatherDescription}
-              //className={classes.weatherIcon}
-              src={weatherIcon}
-            ></img>
-          </>
-        }
       />
       <CardContent>
-        <Grid style={{ display: "flex" }}>
-          <Typography variant={"h6"}>{weatherDescription}</Typography>
+        <Grid
+          container
+          direction='row'
+          justifyContent='space-between'
+          alignItems='center'>
+          <Grid item style={{ display: "flex" }}>
+            <Typography variant={"h2"}>{temp}</Typography>
+            <Typography variant={"caption"}>
+              {tempMin} / {tempMax}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <img
+              style={{
+                width: "5em",
+              }}
+              alt={weatherDescription}
+              //className={classes.weatherIcon}
+              src={weatherIcon}></img>
+          </Grid>
         </Grid>
-        <Grid style={{ display: "flex" }}>
-          <Typography variant={"h6"}>{time}</Typography>
+        <Grid
+          container
+          direction='row'
+          justifyContent='space-between'
+          alignItems='center'>
+          <Typography variant={"overline"}>Feels like {feelsLike}</Typography>
+          <Typography variant={"overline"}>{weatherDescription}</Typography>
         </Grid>
       </CardContent>
     </>

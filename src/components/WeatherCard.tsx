@@ -46,8 +46,9 @@ const WeatherCard = (city: any) => {
           style={{
             height: "fit-content",
             alignContent: "left",
-            width: "60vh",
+            width: "30em",
             textAlign: "left",
+            backgroundColor: `rgb(255,255,255,0.8)`,
           }}>
           <WeatherContentSimple weather={weather} />
         </Card>
