@@ -1,8 +1,6 @@
 import axios, { AxiosResponse } from "axios"
 
-import token from "../config"
-
-//62b6f50769a8cfab9eeecfd94b644483
+import { token } from "../config"
 
 const getWeather = async (city: string) => {
   let status
