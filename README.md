@@ -22,23 +22,24 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <!-- Logo 
+  <a href="https://github.com/aheige/Weather">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  </a>-->
 
   <h3 align="center">Weather</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    A simple weather app!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/aheige/Weather"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/aheige/Weather">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/aheige/Weather/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/aheige/Weather/issues">Request Feature</a>
   </p>
 </div>
 
@@ -173,13 +174,13 @@ Project Link: [https://github.com/AHeige/Weather](https://github.com/AHeige/Weat
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/aheige/Weather.svg?style=for-the-badge
 [contributors-url]: https://github.com/AHeige/Weather/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/aheige/Weather.svg?style=for-the-badge
 [forks-url]: https://github.com/AHeige/Weather/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/aheige/Weather.svg?style=for-the-badge
 [stars-url]: https://github.com/AHeige/Weather/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/aheige/Weather.svg?style=for-the-badge
 [issues-url]: https://github.com/AHeige/Weather/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/alexander-heige-083480143/
