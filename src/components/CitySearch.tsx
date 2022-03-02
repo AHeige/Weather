@@ -1,7 +1,10 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
-//Constants
-import cities from "../constants/cities"
+//Services
+import getCity from "../services/cityService"
+
+//Utils
+import { resolveCitiesData } from "../utils/cities"
 
 //Material-UI
 import Autocomplete from "@mui/material/Autocomplete"
@@ -18,6 +21,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   inputRoot: {
+    width: "25em",
     color: "#000000",
     borderColor: "#000000",
     '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
@@ -26,7 +30,7 @@ const useStyles = makeStyles(() => ({
       borderColor: "#000000",
     },
     "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "transparent",
+      //borderColor: "transparent",
       //borderBottomColor: "#fff",
     },
     "&:hover .MuiOutlinedInput-notchedOutline": {
@@ -41,20 +45,42 @@ const useStyles = makeStyles(() => ({
 const CitySearch = ({ setCity }: any) => {
   const classes = useStyles()
 
+  const [cities, setCities] = useState<any>([])
+  const [error, setError] = useState<boolean>(false)
+
+  const handleCitySearch = (search: string) => {
+    if (search.length > 2) {
+      citySearch(search)
+    } else console.log("Haha you need to type more")
+  }
+
+  const citySearch = async (search: string) => {
+    let result = await getCity(search)
+    if (result.data) {
+      const whaterver: any = result.data
+      const { cities } = resolveCitiesData(whaterver)
+      setCities(cities)
+    } else if (!result.data) {
+      setError(true)
+    }
+  }
+
+  useEffect(() => {})
+
   return (
     <>
       <Autocomplete
         renderInput={(params) => (
           <TextField
-            error={false}
-            helperText={""}
+            error={error}
+            helperText={error ? "No city found" : ""}
             {...params}
-            placeholder="Sök stad"
+            placeholder='Search any city'
           />
         )}
         options={cities}
+        onInputChange={(e, value) => handleCitySearch(value)}
         onChange={(e, value) => setCity(value)}
-        freeSolo
         classes={{ inputRoot: classes.inputRoot }}
       />
     </>
