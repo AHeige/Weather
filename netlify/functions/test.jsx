@@ -1,3 +1,5 @@
-import React from "react"
+const handler = async () => {
+  console.log("Hi from netlify")
+}
 
-console.log("This is from Netlify")
+export default handler
