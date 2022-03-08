@@ -6,7 +6,7 @@ const getTest = async () => {
   let error
 
   await axios
-    .get(`/.netlify/functions/test`)
+    .get(`../netlify/functions/test`)
     .then((response: AxiosResponse) => {
       data = response.data
       status = response.status
