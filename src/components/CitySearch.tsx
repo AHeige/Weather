@@ -51,9 +51,7 @@ const CitySearch = ({ setCity, city }: any) => {
   const [error, setError] = useState<boolean>(false)
 
   const handleCitySearch = (search: any) => {
-    const citySearched = search
     citySearch(search)
-    setSearchParams({ citySearched })
   }
 
   const citySearch = async (search: string) => {
@@ -64,6 +62,15 @@ const CitySearch = ({ setCity, city }: any) => {
       setCities(cities)
     } else if (!result.data) {
       setError(true)
+    }
+  }
+
+  const handleChosenCity = (value: any) => {
+    const citySearched = value
+    if (value) {
+      setCity(value)
+      setSearchParams({ citySearched })
+      console.log(searchParams)
     }
   }
 
@@ -81,9 +88,8 @@ const CitySearch = ({ setCity, city }: any) => {
           />
         )}
         options={cities}
-        value={searchParams && city}
         onInputChange={(e, value) => handleCitySearch(value)}
-        onChange={(e, value) => setCity(value)}
+        onChange={(e, value) => handleChosenCity(value)}
         classes={{ inputRoot: classes.inputRoot }}
       />
     </>
