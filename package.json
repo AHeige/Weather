@@ -20,12 +20,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
-<<<<<<< HEAD
     "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.3",
-=======
-    "react-scripts": "^5.0.0",
->>>>>>> 672f19a3368acfd2724585b527f3d601d3609aba
     "typescript": "^4.4.4",
     "web-vitals": "^1.1.2"
   },
