@@ -1,4 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react"
+import { useLocation, useSearchParams } from "react-router-dom"
+import queryString from "query-string"
 
 //Components
 import CitySearch from "../components/CitySearch"
@@ -19,8 +21,11 @@ import AppBar from "@mui/material/AppBar"
 const WeatherPage = () => {
   const { weatherType } = useContext(weatherContext)
 
+  const { search } = useLocation()
+  const { citySearched } = queryString.parse(search)
+
   const [appBarHeight, setAppBarHeight] = useState<number>()
-  const [city, setCity] = useState<string>("Göteborg")
+  const [city, setCity] = useState(citySearched)
 
   const appBarRef: any = useRef()
 

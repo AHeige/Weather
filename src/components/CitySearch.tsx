@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { useSearchParams } from "react-router-dom"
 
 //Services
 import getCity from "../services/cityService"
@@ -44,13 +45,16 @@ const useStyles = makeStyles(() => ({
 
 const CitySearch = ({ setCity }: any) => {
   const classes = useStyles()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const [cities, setCities] = useState<any>([])
   const [error, setError] = useState<boolean>(false)
 
-  const handleCitySearch = (search: string) => {
+  const handleCitySearch = (search: any) => {
     if (search.length > 2) {
+      const citySearched = search
       citySearch(search)
+      setSearchParams({ citySearched })
     } else console.log("Haha you need to type more")
   }
 
@@ -80,6 +84,7 @@ const CitySearch = ({ setCity }: any) => {
         )}
         options={cities}
         onInputChange={(e, value) => handleCitySearch(value)}
+        //value={searchParams}
         onChange={(e, value) => setCity(value)}
         classes={{ inputRoot: classes.inputRoot }}
       />
