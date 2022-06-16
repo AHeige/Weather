@@ -43,7 +43,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const CitySearch = ({ setCity }: any) => {
+const CitySearch = ({ setCity, city }: any) => {
   const classes = useStyles()
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -51,11 +51,9 @@ const CitySearch = ({ setCity }: any) => {
   const [error, setError] = useState<boolean>(false)
 
   const handleCitySearch = (search: any) => {
-    if (search.length > 2) {
-      const citySearched = search
-      citySearch(search)
-      setSearchParams({ citySearched })
-    } else console.log("Haha you need to type more")
+    const citySearched = search
+    citySearch(search)
+    setSearchParams({ citySearched })
   }
 
   const citySearch = async (search: string) => {
@@ -83,8 +81,8 @@ const CitySearch = ({ setCity }: any) => {
           />
         )}
         options={cities}
+        value={searchParams && city}
         onInputChange={(e, value) => handleCitySearch(value)}
-        //value={searchParams}
         onChange={(e, value) => setCity(value)}
         classes={{ inputRoot: classes.inputRoot }}
       />
