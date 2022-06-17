@@ -19,7 +19,6 @@ import Grid from "@mui/material/Grid"
 import AppBar from "@mui/material/AppBar"
 
 //Services
-import getTest from "../services/netlifyTest"
 
 const WeatherPage = () => {
   const { weatherType } = useContext(weatherContext)
@@ -37,8 +36,6 @@ const WeatherPage = () => {
 
     setAppBarHeight(appBarHeight + 20)
   }, [appBarRef])
-
-  getTest()
 
   return (
     <Grid
