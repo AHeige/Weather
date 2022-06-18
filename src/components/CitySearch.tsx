@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import SnackBar from "./SnackBar";
 
 //Services
-import getCity from "../services/cityService"
+import getCity from "../services/cityService";
 
 //Utils
-import { resolveCitiesData } from "../utils/cities"
+import { resolveCitiesData } from "../utils/cities";
 
 //Material-UI
-import Autocomplete from "@mui/material/Autocomplete"
-import TextField from "@mui/material/TextField"
-import { makeStyles } from "@mui/styles"
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -41,40 +42,40 @@ const useStyles = makeStyles(() => ({
       borderColor: "#000000",
     },
   },
-}))
+}));
 
 const CitySearch = ({ setCity, city }: any) => {
-  const classes = useStyles()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const classes = useStyles();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [cities, setCities] = useState<any>([])
-  const [error, setError] = useState<boolean>(false)
+  const [cities, setCities] = useState<any>([]);
+  const [error, setError] = useState<boolean>(false);
 
   const handleCitySearch = (search: any) => {
-    citySearch(search)
-  }
+    citySearch(search);
+  };
 
   const citySearch = async (search: string) => {
-    let result = await getCity(search)
+    let result = await getCity(search);
     if (result.data) {
-      const whaterver: any = result.data
-      const { cities } = resolveCitiesData(whaterver)
-      setCities(cities)
+      const whaterver: any = result.data;
+      const { cities } = resolveCitiesData(whaterver);
+      setCities(cities);
     } else if (!result.data) {
-      setError(true)
+      setError(true);
     }
-  }
+  };
 
   const handleChosenCity = (value: any) => {
-    const citySearched = value
+    const citySearched = value;
     if (value) {
-      setCity(value)
-      setSearchParams({ citySearched })
-      console.log(searchParams)
+      setCity(value);
+      setSearchParams({ citySearched });
+      console.log(searchParams);
     }
-  }
+  };
 
-  useEffect(() => {})
+  useEffect(() => {});
 
   return (
     <>
@@ -84,7 +85,7 @@ const CitySearch = ({ setCity, city }: any) => {
             error={error}
             helperText={error ? "No city found" : ""}
             {...params}
-            placeholder='Search any city'
+            placeholder="Search any city"
           />
         )}
         options={cities}
@@ -92,8 +93,9 @@ const CitySearch = ({ setCity, city }: any) => {
         onChange={(e, value) => handleChosenCity(value)}
         classes={{ inputRoot: classes.inputRoot }}
       />
+      <SnackBar open={error} />
     </>
-  )
-}
+  );
+};
 
-export default CitySearch
+export default CitySearch;
