@@ -1,11 +1,11 @@
-import { countries } from "country-data"
+import { countries } from "country-data";
 
 export const resolveWeatherData = (weather: any) => {
-  const weatherObject = weather.weather
+  const weatherObject = weather.weather;
 
   const capitalize = (str: any) => {
-    return str.charAt(0).toUpperCase() + str.slice(1)
-  }
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   const resolveWeather = {
     weatherType: weatherObject.weather[0].main,
@@ -21,15 +21,21 @@ export const resolveWeatherData = (weather: any) => {
     city: weatherObject.name,
     country: countries[weatherObject.sys.country].name,
     countryCode: weatherObject.sys.country,
-  }
+  };
 
-  return resolveWeather
-}
+  return resolveWeather;
+};
+
+export const resolveForecastData = (weather: any) => {
+  const weatherObject = weather.weather;
+
+  const resolveForecast = {};
+};
 
 export const resolveWeatherIcon = (icon: string) => {
-  const iconUrl = "http://openweathermap.org/img/wn/"
+  const iconUrl = "http://openweathermap.org/img/wn/";
 
-  const iconImgType = ".png"
+  const iconImgType = ".png";
 
   const iconList: any = {
     "01d": "01d@2x",
@@ -50,8 +56,8 @@ export const resolveWeatherIcon = (icon: string) => {
     "11n": "11n@2x",
     "13n": "13n@2x",
     "50n": "50n@2x",
-  }
+  };
 
-  let weatherIcon = iconUrl.concat(iconList[icon], iconImgType)
-  return weatherIcon
-}
+  let weatherIcon = iconUrl.concat(iconList[icon], iconImgType);
+  return weatherIcon;
+};

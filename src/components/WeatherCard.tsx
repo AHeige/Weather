@@ -31,6 +31,7 @@ const WeatherCard = (city: any) => {
     setErrorText(chosenCity);
     setError(false);
     if (weather.data) {
+      console.log(weather.data);
       setWeather(weather.data);
       setIsDataFound(true);
     } else if (weather.error) {
