@@ -9,17 +9,17 @@ import Typography from "@mui/material/Typography";
 //Utils
 import { resolveForecastData } from "../utils/weather";
 
-const WeatherContentSimple = (weather: any) => {
+const WeatherForecast = (weather: any) => {
   const foreCastTable = {
     //A table with the forecast
   };
 
   //Get back the resolved data from the util
-  const {
-    //countryCode
-  } = resolveForecastData(weather);
+  const { list } = resolveForecastData(weather);
 
-  return <></>;
+  console.log(list);
+
+  return <Typography>Test</Typography>;
 };
 
-export default WeatherContentSimple;
+export default WeatherForecast;

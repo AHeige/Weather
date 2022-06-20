@@ -27,9 +27,13 @@ export const resolveWeatherData = (weather: any) => {
 };
 
 export const resolveForecastData = (weather: any) => {
-  const weatherObject = weather.weather;
+  const foreCastObject = weather.weather;
 
-  const resolveForecast = {};
+  const resolveForecast = {
+    list: foreCastObject,
+  };
+
+  return resolveForecast;
 };
 
 export const resolveWeatherIcon = (icon: string) => {

@@ -70,7 +70,6 @@ const CitySearch = ({ setCity, city }: any) => {
     if (value) {
       setCity(value);
       setSearchParams({ citySearched });
-      console.log(searchParams);
     }
   };
 
