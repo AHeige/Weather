@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import SnackBar from "./SnackBar";
 
 //Services
 import getCity from "../services/cityService";
@@ -93,7 +92,6 @@ const CitySearch = ({ setCity, city }: any) => {
         onChange={(e, value) => handleChosenCity(value)}
         classes={{ inputRoot: classes.inputRoot }}
       />
-      <SnackBar open={error} />
     </>
   );
 };
