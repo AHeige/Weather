@@ -57,8 +57,8 @@ const CitySearch = ({ setCity, city }: any) => {
   const citySearch = async (search: string) => {
     let result = await getCity(search);
     if (result.data) {
-      const whaterver: any = result.data;
-      const { cities } = resolveCitiesData(whaterver);
+      const data: any = result.data;
+      const { cities } = resolveCitiesData(data);
       setCities(cities);
     } else if (!result.data) {
       setError(true);

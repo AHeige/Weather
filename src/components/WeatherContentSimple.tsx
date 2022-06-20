@@ -1,19 +1,23 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect } from "react";
 
 //Contexts
-import weatherContext from "../contexts/weatherContext"
+import weatherContext from "../contexts/weatherContext";
 
 //Material-ui
-import Grid from "@mui/material/Grid"
-import CardContent from "@mui/material/CardContent"
-import CardHeader from "@mui/material/CardHeader"
-import Typography from "@mui/material/Typography"
+import Grid from "@mui/material/Grid";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
 
 //Utils
-import { resolveWeatherData } from "../utils/weather"
+import { resolveWeatherData } from "../utils/weather";
 
-const WeatherContentSimple = (weather: any) => {
-  const { setWeatherType } = useContext(weatherContext)
+type WeatherContentSimple = {
+  weather: any;
+};
+
+const WeatherContentSimple = (weather: WeatherContentSimple) => {
+  const { setWeatherType } = useContext(weatherContext);
 
   const {
     temp,
@@ -29,11 +33,11 @@ const WeatherContentSimple = (weather: any) => {
     city,
     country,
     //countryCode,
-  } = resolveWeatherData(weather)
+  } = resolveWeatherData(weather);
 
   useEffect(() => {
-    setWeatherType(weatherType)
-  })
+    setWeatherType(weatherType);
+  });
 
   return (
     <>
@@ -46,7 +50,8 @@ const WeatherContentSimple = (weather: any) => {
             </Typography>
             <Typography
               variant={"caption"}
-              style={{ marginLeft: "0.2em", paddingTop: "0.5vw" }}>
+              style={{ marginLeft: "0.2em", paddingTop: "0.5vw" }}
+            >
               {country}
             </Typography>
           </Grid>
@@ -55,9 +60,10 @@ const WeatherContentSimple = (weather: any) => {
       <CardContent>
         <Grid
           container
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'>
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Grid item style={{ display: "flex" }}>
             <Typography variant={"h2"}>{temp}</Typography>
             <Typography variant={"caption"}>
@@ -71,20 +77,22 @@ const WeatherContentSimple = (weather: any) => {
               }}
               alt={weatherDescription}
               //className={classes.weatherIcon}
-              src={weatherIcon}></img>
+              src={weatherIcon}
+            ></img>
           </Grid>
         </Grid>
         <Grid
           container
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'>
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Typography variant={"overline"}>Feels like {feelsLike}</Typography>
           <Typography variant={"overline"}>{weatherDescription}</Typography>
         </Grid>
       </CardContent>
     </>
-  )
-}
+  );
+};
 
-export default WeatherContentSimple
+export default WeatherContentSimple;

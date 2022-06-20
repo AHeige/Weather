@@ -8,6 +8,7 @@ import getForecast from "../services/forecastService";
 
 //Material-UI
 import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 
 //Components
 import WeatherContentSimple from "./WeatherContentSimple";
@@ -16,7 +17,7 @@ import WeatherForecast from "./WeatherForecast";
 
 const WeatherCard = (city: any) => {
   const [weather, setWeather] = useState({});
-  const [forecast, setForecast] = useState({});
+  const [forecast, setForecast] = useState<{}>({});
   const [isDataFound, setIsDataFound] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [errorText, setErrorText] = useState<string>("");
@@ -34,6 +35,7 @@ const WeatherCard = (city: any) => {
     let weatherForecast = await getForecast(chosenCity);
     setErrorText(chosenCity);
     setError(false);
+    //weather.data is the data for ONE single day
     if (weather.data) {
       setWeather(weather.data);
       setIsDataFound(true);
@@ -42,6 +44,7 @@ const WeatherCard = (city: any) => {
       setError(true);
       console.error(weather.error);
     }
+    //weatherForecast.data is the data for a weather forecast
     if (weatherForecast.data) {
       setForecast(weatherForecast.data);
     } else if (weatherForecast.error) {
@@ -57,7 +60,7 @@ const WeatherCard = (city: any) => {
   return (
     <>
       {isDataFound && (
-        <>
+        <Grid>
           <Card
             style={{
               height: "fit-content",
@@ -69,8 +72,14 @@ const WeatherCard = (city: any) => {
           >
             <WeatherContentSimple weather={weather} />
           </Card>
-          <WeatherForecast weather={forecast} />
-        </>
+          <Card
+            style={{
+              backgroundColor: `rgb(255,255,255,0.8)`,
+            }}
+          >
+            <WeatherForecast forecast={forecast} />
+          </Card>
+        </Grid>
       )}
       {error && handleError(city)}
     </>

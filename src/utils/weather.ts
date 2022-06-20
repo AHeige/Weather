@@ -26,11 +26,11 @@ export const resolveWeatherData = (weather: any) => {
   return resolveWeather;
 };
 
-export const resolveForecastData = (weather: any) => {
-  const foreCastObject = weather.weather;
+export const resolveForecastData = (forecast: any) => {
+  const foreCastObject = forecast.forecast;
 
   const resolveForecast = {
-    list: foreCastObject,
+    list: foreCastObject.list,
   };
 
   return resolveForecast;
