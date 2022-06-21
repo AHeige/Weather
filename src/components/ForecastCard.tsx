@@ -13,17 +13,21 @@ import Grid from "@mui/material/Grid"
 const ForecastCard = (forecast: any) => {
   const list = resolveForecastData(forecast)
 
-  const fclist = Object.values(list)[0]
+  const forecastlist = Object.values(list)[0]
+
+  console.log(forecastlist)
 
   const forecastTable = () => {
-    return fclist.map((a: any) => (
-      <Grid item xs={3} direction={"column"} key={a.key}>
-        <Card>
-          <CardHeader title={a.day} subheader={a.time} />
-          <CardContent>{a.temp}</CardContent>
-        </Card>
-      </Grid>
-    ))
+    return forecastlist
+      .filter((a: any) => a.day !== "ån")
+      .map((a: any) => (
+        <Grid item xs={3} direction={"column"} key={a.key}>
+          <Card>
+            <CardHeader title={a.time} subheader={a.day} />
+            <CardContent>{a.temp}</CardContent>
+          </Card>
+        </Grid>
+      ))
   }
 
   return (
