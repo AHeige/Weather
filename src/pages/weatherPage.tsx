@@ -28,6 +28,7 @@ const WeatherPage = () => {
 
   const [appBarHeight, setAppBarHeight] = useState<number>()
   const [city, setCity] = useState(citySearched)
+  const [history, setHistory] = useState<string[]>([])
 
   const appBarRef: any = useRef()
 
@@ -36,6 +37,15 @@ const WeatherPage = () => {
 
     setAppBarHeight(appBarHeight + 20)
   }, [appBarRef])
+
+  useEffect(() => {
+    handleHistory(city)
+  }, [city])
+
+  const handleHistory = (c: any) => {
+    setHistory((history) => [...history, c])
+    //Use component to show history
+  }
 
   return (
     <Grid

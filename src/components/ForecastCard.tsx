@@ -15,8 +15,6 @@ const ForecastCard = (forecast: any) => {
 
   const forecastlist = Object.values(list)[0]
 
-  console.log(forecastlist)
-
   const forecastTable = () => {
     return forecastlist
       .filter((a: any) => a.day !== "ån")
