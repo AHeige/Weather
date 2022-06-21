@@ -6,6 +6,7 @@ export const resolveForecastData = (forecast: Forecast) => {
 
   let forecastList: any = []
 
+  //Turn time string into a weekday output
   const getWeekday = (dateFormat: any) => {
     // split date in non-digit chaarcters
     let [d, m, y] = dateFormat.split(/\D/)
@@ -18,10 +19,11 @@ export const resolveForecastData = (forecast: Forecast) => {
     return weekday
   }
 
+  //Turn time string into hours and minutes
   const getTime = (timeData: any) => {
     // split date in non-digit chaarcters
 
-    const time = moment(timeData).format("hh:mm")
+    const time = moment(timeData).format("HH:mm")
     return time
   }
 
