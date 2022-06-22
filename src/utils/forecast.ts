@@ -8,11 +8,8 @@ export const resolveForecastData = (forecast: Forecast) => {
 
   //Turn time string into a weekday output
   const getWeekday = (dateFormat: any) => {
-    // split date in non-digit chaarcters
-    let [d, m, y] = dateFormat.split(/\D/);
-
     //put them in Date method
-    const date = new Date(y, m - 1, d);
+    const date = new Date(dateFormat);
     //and return weekday in long format
     const weekday = date.toLocaleString("default", { weekday: "short" });
 
