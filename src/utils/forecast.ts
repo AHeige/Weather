@@ -1,31 +1,31 @@
-import { Forecast } from "../interface/forecast"
-import moment from "moment"
+import { Forecast } from "../interface/forecast";
+import moment from "moment";
 
 export const resolveForecastData = (forecast: Forecast) => {
-  const forecastData = forecast.forecast.list
+  const forecastData = forecast.forecast.list;
 
-  let forecastList: any = []
+  let forecastList: any = [];
 
   //Turn time string into a weekday output
   const getWeekday = (dateFormat: any) => {
     // split date in non-digit chaarcters
-    let [d, m, y] = dateFormat.split(/\D/)
+    let [d, m, y] = dateFormat.split(/\D/);
 
     //put them in Date method
-    const date = new Date(y, m - 1, d)
+    const date = new Date(y, m - 1, d);
     //and return weekday in long format
-    const weekday = date.toLocaleString("default", { weekday: "short" })
+    const weekday = date.toLocaleString("default", { weekday: "short" });
 
-    return weekday
-  }
+    return weekday;
+  };
 
   //Turn time string into hours and minutes
   const getTime = (timeData: any) => {
     // split date in non-digit chaarcters
 
-    const time = moment(timeData).format("HH:mm")
-    return time
-  }
+    const time = moment(timeData).format("HH:mm");
+    return time;
+  };
 
   forecastData.forEach((data) => {
     const snapshot = {
@@ -33,13 +33,27 @@ export const resolveForecastData = (forecast: Forecast) => {
       day: getWeekday(data.dt_txt),
       time: getTime(data.dt_txt),
       key: data.dt,
-    }
-    forecastList.push(snapshot)
-  })
+    };
+    forecastList.push(snapshot);
+  });
 
   const resolveForecast = {
     list: forecastList,
+  };
+
+  function groupBy(objectArray: any, property: any) {
+    return objectArray.reduce(function(acc: any, obj: any) {
+      let key = obj[property];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+    }, {});
   }
 
-  return resolveForecast
-}
+  const week = groupBy(resolveForecast.list, "day");
+  console.log(week);
+
+  return resolveForecast;
+};
