@@ -1,80 +1,112 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
 //Constants import weatherData from "../constants/weatherTest"
 
 //Services
-import getWeather from "../services/weatherService"
-import getForecast from "../services/forecastService"
+import getWeather from "../services/weatherService";
+import getForecast from "../services/forecastService";
 
 //Material-UI
-import Card from "@mui/material/Card"
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 //Components
-import WeatherContentSimple from "./WeatherContentSimple"
-import ForecastCard from "./ForecastCard"
-import SnackBar from "./SnackBar"
+import WeatherContentSimple from "./WeatherContentSimple";
+import ForecastCard from "./ForecastCard";
+import ForecastToday from "./ForecastToday";
+import SnackBar from "./SnackBar";
 
 const WeatherCard = (city: any) => {
-  const [weather, setWeather] = useState({})
-  const [forecast, setForecast] = useState({})
-  const [isDataFound, setIsDataFound] = useState<boolean>(false)
-  const [error, setError] = useState<boolean>(false)
-  const [errorText, setErrorText] = useState<string>("")
+  const [weather, setWeather] = useState({});
+  const [forecast, setForecast] = useState({});
+  const [isDataFound, setIsDataFound] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>("");
 
-  city = Object.values(city).toString()
+  city = Object.values(city).toString();
 
   useEffect(() => {
     if (city) {
-      handleSearch(city)
+      handleSearch(city);
     }
-  }, [city])
+  }, [city]);
 
   const handleSearch = async (chosenCity: any) => {
-    let weather = await getWeather(chosenCity)
-    await handleForecast(chosenCity)
-    setErrorText(chosenCity)
-    setError(false)
+    let weather = await getWeather(chosenCity);
+    await handleForecast(chosenCity);
+    setErrorText(chosenCity);
+    setError(false);
     if (weather.data) {
-      setWeather(weather.data)
-      setIsDataFound(true)
+      setWeather(weather.data);
+      setIsDataFound(true);
     } else if (weather.error) {
-      setIsDataFound(false)
-      setError(true)
-      console.error(weather.error)
+      setIsDataFound(false);
+      setError(true);
+      console.error(weather.error);
     }
-  }
+  };
 
   const handleForecast = async (chosenCity: any) => {
-    let forecast = await getForecast(chosenCity)
+    let forecast = await getForecast(chosenCity);
     if (forecast.data) {
-      setForecast(forecast.data)
+      setForecast(forecast.data);
     } else if (forecast.error) {
-      console.error(forecast.error)
+      console.error(forecast.error);
     }
-  }
+  };
 
   const handleError = (city: any) => {
-    return <SnackBar open={error} text={city + " could not be found!"} />
-  }
+    return <SnackBar open={error} text={city + " could not be found!"} />;
+  };
 
   return (
     <>
       {isDataFound && (
-        <Card
-          style={{
-            height: "fit-content",
-            alignContent: "left",
-            width: "30em",
-            textAlign: "left",
-            backgroundColor: `rgb(255,255,255,0.8)`,
-          }}>
-          <WeatherContentSimple weather={weather} />
-          <ForecastCard forecast={forecast} />
-        </Card>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Grid item xs={6} style={{ flexBasis: "0%", maxWidth: "inherit" }}>
+            <Card
+              style={{
+                height: "fit-content",
+                alignContent: "left",
+                width: "30em",
+                textAlign: "left",
+                backgroundColor: `rgb(255,255,255,0.8)`,
+              }}
+            >
+              <WeatherContentSimple weather={weather} />
+              <ForecastToday forecast={forecast} />
+            </Card>
+          </Grid>
+          <Grid item xs={6} style={{ maxWidth: "inherit" }}>
+            <Card
+              style={{
+                height: "fit-content",
+                alignContent: "left",
+                width: "30em",
+                textAlign: "left",
+                backgroundColor: `rgb(255,255,255,0.8)`,
+                marginTop: "1em",
+              }}
+            >
+              <CardHeader
+                style={{ paddingBottom: "0px" }}
+                subheader={<Typography>Forecast</Typography>}
+              />
+              <ForecastCard forecast={forecast} />
+            </Card>
+          </Grid>
+        </Grid>
       )}
       {error && handleError(city)}
     </>
-  )
-}
+  );
+};
 
-export default WeatherCard
+export default WeatherCard;

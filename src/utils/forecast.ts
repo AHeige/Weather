@@ -24,12 +24,21 @@ export const resolveForecastData = (forecast: Forecast) => {
     return time;
   };
 
+  const getDate = (timeData: any) => {
+    // split date in non-digit chaarcters
+
+    const time = moment(timeData).format("MM/DD/YYYY");
+    return time;
+  };
+
   forecastData.forEach((data) => {
     const snapshot = {
       temp: data.main.temp + "°",
       day: getWeekday(data.dt_txt),
       time: getTime(data.dt_txt),
+      date: getDate(data.dt_txt),
       key: data.dt,
+      desc: data.weather[0].description,
     };
     forecastList.push(snapshot);
   });
@@ -49,8 +58,8 @@ export const resolveForecastData = (forecast: Forecast) => {
     }, {});
   }
 
-  const week = groupBy(resolveForecast.list, "day");
-  console.log(week);
+  //Groups array on date
+  const week = groupBy(resolveForecast.list, "date");
 
   return resolveForecast;
 };
