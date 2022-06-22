@@ -1,35 +1,35 @@
-import { Forecast } from "../interface/forecast";
-import moment from "moment";
+import { Forecast } from "../interface/forecast"
+import moment from "moment"
 
 export const resolveForecastData = (forecast: Forecast) => {
-  const forecastData = forecast.forecast.list;
+  const forecastData = forecast.forecast.list
 
-  let forecastList: any = [];
+  let forecastList: any = []
 
   //Turn time string into a weekday output
   const getWeekday = (dateFormat: any) => {
     //put them in Date method
-    const date = new Date(dateFormat);
+    const date = new Date(dateFormat)
     //and return weekday in long format
-    const weekday = date.toLocaleString("default", { weekday: "short" });
+    const weekday = date.toLocaleString("default", { weekday: "short" })
 
-    return weekday;
-  };
+    return weekday
+  }
 
   //Turn time string into hours and minutes
   const getTime = (timeData: any) => {
     // split date in non-digit chaarcters
 
-    const time = moment(timeData).format("HH:mm");
-    return time;
-  };
+    const time = moment(timeData).format("HH:mm")
+    return time
+  }
 
   const getDate = (timeData: any) => {
     // split date in non-digit chaarcters
 
-    const time = moment(timeData).format("MM/DD/YYYY");
-    return time;
-  };
+    const time = moment(timeData).format("MM/dd/yyyy")
+    return time
+  }
 
   forecastData.forEach((data) => {
     const snapshot = {
@@ -39,27 +39,27 @@ export const resolveForecastData = (forecast: Forecast) => {
       date: getDate(data.dt_txt),
       key: data.dt,
       desc: data.weather[0].description,
-    };
-    forecastList.push(snapshot);
-  });
+    }
+    forecastList.push(snapshot)
+  })
 
   const resolveForecast = {
     list: forecastList,
-  };
+  }
 
   function groupBy(objectArray: any, property: any) {
     return objectArray.reduce(function(acc: any, obj: any) {
-      let key = obj[property];
+      let key = obj[property]
       if (!acc[key]) {
-        acc[key] = [];
+        acc[key] = []
       }
-      acc[key].push(obj);
-      return acc;
-    }, {});
+      acc[key].push(obj)
+      return acc
+    }, {})
   }
 
   //Groups array on date
-  const week = groupBy(resolveForecast.list, "date");
+  const week = groupBy(resolveForecast.list, "date")
 
-  return resolveForecast;
-};
+  return resolveForecast
+}
