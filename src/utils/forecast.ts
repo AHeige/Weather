@@ -9,11 +9,11 @@ export const resolveForecastData = (forecast: Forecast) => {
   //Turn time string into a weekday output
   const getWeekday = (dateFormat: any) => {
     //put them in Date method
-    const date = new Date(dateFormat)
-    //and return weekday in long format
-    const weekday = date.toLocaleString("default", { weekday: "short" })
 
-    return weekday.toString()
+    //and return weekday in long format
+    const weekday = moment(dateFormat).format("ddd")
+
+    return weekday
   }
 
   //Turn time string into hours and minutes

@@ -19,7 +19,7 @@ const ForecastCard = (forecast: any) => {
     return forecastlist.map((a: any) => (
       <Grid item xs={3} direction={"column"} key={a.key}>
         <Card style={{ backgroundColor: `rgb(255,255,255, 0)` }}>
-          <CardHeader title={a.day.toString()} subheader={a.time.toString()} />
+          <CardHeader title={a.day} subheader={a.time} />
           <CardContent>{a.desc}</CardContent>
           <CardContent>{a.temp}</CardContent>
         </Card>
