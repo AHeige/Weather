@@ -13,7 +13,7 @@ export const resolveForecastData = (forecast: Forecast) => {
     //and return weekday in long format
     const weekday = date.toLocaleString("default", { weekday: "short" })
 
-    return weekday
+    return weekday.toString()
   }
 
   //Turn time string into hours and minutes
