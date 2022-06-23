@@ -72,7 +72,7 @@ const WeatherCard = (city: any) => {
               alignContent: "left",
               width: "30em",
               textAlign: "left",
-              backgroundColor: `rgb(255,255,255,0.8)`,
+              backgroundColor: `rgb(255,255,255,0.9)`,
             }}>
             <WeatherContentSimple weather={weather} />
             <ForecastToday forecast={forecast} />
