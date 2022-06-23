@@ -33,9 +33,6 @@ const ForecastCard = (forecast: any) => {
               //className={classes.weatherIcon}
               src={a.icon}></img>
           </CardContent>
-          <CardContent style={{ paddingTop: "0px", paddingBottom: "0px" }}>
-            {a.desc}
-          </CardContent>
           <CardContent>{a.temp}</CardContent>
         </Card>
       </Grid>
@@ -48,7 +45,7 @@ const ForecastCard = (forecast: any) => {
         container
         direction={"column"}
         style={{
-          height: "12em",
+          height: "10.9em",
           flexGrow: 1,
           gridColumn: 1,
           marginTop: "0em",
