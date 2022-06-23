@@ -1,4 +1,5 @@
 import { Forecast } from "../interface/forecast"
+import { resolveWeatherIcon } from "./weather"
 import moment from "moment"
 
 export const resolveForecastData = (forecast: Forecast) => {
@@ -39,6 +40,7 @@ export const resolveForecastData = (forecast: Forecast) => {
       date: getDate(data.dt_txt),
       key: data.dt,
       desc: data.weather[0].description,
+      icon: resolveWeatherIcon(data.weather[0].icon),
     }
     forecastList.push(snapshot)
   })

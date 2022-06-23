@@ -18,9 +18,24 @@ const ForecastCard = (forecast: any) => {
   const forecastTable = () => {
     return forecastlist.map((a: any) => (
       <Grid item xs={3} direction={"column"} key={a.key}>
-        <Card style={{ backgroundColor: `rgb(255,255,255, 0)` }}>
-          <CardHeader title={a.day} subheader={a.time} />
-          <CardContent>{a.desc}</CardContent>
+        <Card elevation={1} style={{ backgroundColor: `rgb(255,255,255, 0)` }}>
+          <CardHeader
+            title={a.day}
+            subheader={a.time}
+            style={{ paddingBottom: "0px" }}
+          />
+          <CardContent style={{ paddingTop: "0px", paddingBottom: "0px" }}>
+            <img
+              style={{
+                width: "2.5em",
+              }}
+              alt={a.desc}
+              //className={classes.weatherIcon}
+              src={a.icon}></img>
+          </CardContent>
+          <CardContent style={{ paddingTop: "0px", paddingBottom: "0px" }}>
+            {a.desc}
+          </CardContent>
           <CardContent>{a.temp}</CardContent>
         </Card>
       </Grid>
@@ -33,7 +48,7 @@ const ForecastCard = (forecast: any) => {
         container
         direction={"column"}
         style={{
-          height: "12.3em",
+          height: "12em",
           flexGrow: 1,
           gridColumn: 1,
           marginTop: "0em",
