@@ -18,6 +18,11 @@ export const resolveForecastData = (forecast: Forecast) => {
     return weekday
   }
 
+  const getWeekdayLong = (dateformat: any) => {
+    const weekdayLong = moment(dateformat).format("dddd")
+    return weekdayLong
+  }
+
   //Turn time string into hours and minutes
   const getTime = (timeData: any) => {
     // split date in non-digit chaarcters
@@ -41,6 +46,7 @@ export const resolveForecastData = (forecast: Forecast) => {
       humidity: data.main.humidity,
       wind: data.wind.speed,
       day: getWeekday(data.dt_txt),
+      dayLong: getWeekdayLong(data.dt_txt),
       time: getTime(data.dt_txt),
       date: getDate(data.dt_txt),
       key: data.dt,

@@ -73,11 +73,12 @@ const WeatherCard = (city: any) => {
               width: "30em",
               textAlign: "left",
               backgroundColor: `rgb(255,255,255,0.9)`,
-            }}>
+            }}
+          >
             <WeatherContentSimple weather={weather} />
             <ForecastToday forecast={forecast} />
-            <Divider textAlign='left'>
-              <Chip label='Forecast' />
+            <Divider textAlign="left">
+              <Chip label="Forecast" />
             </Divider>
             <ForecastCard forecast={forecast} />
           </Card>
