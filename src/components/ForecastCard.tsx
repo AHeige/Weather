@@ -13,15 +13,21 @@ import Grid from "@mui/material/Grid"
 const ForecastCard = (forecast: any) => {
   const list = resolveForecastData(forecast)
 
-  const forecastlist = Object.values(list)[0]
+  const forecastList = Object.values(list)
+
+  const shifted = forecastList.shift()
 
   const forecastTable = () => {
-    return forecastlist.map((a: any) => (
+    return forecastList.map((a: any) => (
       <Grid item xs={3} direction={"column"} key={a.key}>
         <Card elevation={1} style={{ backgroundColor: `rgb(255,255,255, 0)` }}>
           <CardHeader
-            title={a.day}
-            subheader={a.time}
+            title={a
+              .filter((time: any) => time.time == "12:00")
+              .map((a: any) => a.day)}
+            subheader={a
+              .filter((time: any) => time.time == "12:00")
+              .map((a: any) => a.time)}
             style={{ paddingBottom: "0px" }}
           />
           <CardContent style={{ paddingTop: "0px", paddingBottom: "0px" }}>
@@ -29,11 +35,20 @@ const ForecastCard = (forecast: any) => {
               style={{
                 width: "2.5em",
               }}
-              alt={a.desc}
+              alt={a
+                .filter((time: any) => time.time == "12:00")
+                .map((a: any) => a.desc)}
               //className={classes.weatherIcon}
-              src={a.icon}></img>
+              src={a
+                .filter((time: any) => time.time == "12:00")
+                .map((a: any) => a.icon)}
+            ></img>
           </CardContent>
-          <CardContent>{a.temp}</CardContent>
+          <CardContent>
+            {a
+              .filter((time: any) => time.time == "12:00")
+              .map((a: any) => a.temp)}
+          </CardContent>
         </Card>
       </Grid>
     ))
@@ -49,7 +64,8 @@ const ForecastCard = (forecast: any) => {
           flexGrow: 1,
           gridColumn: 1,
           marginTop: "0em",
-        }}>
+        }}
+      >
         {forecastTable()}
       </Grid>
     </ScrollContainer>

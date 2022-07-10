@@ -6,6 +6,7 @@ export const resolveForecastData = (forecast: Forecast) => {
   const forecastData = forecast.forecast.list
 
   let forecastList: any = []
+  let weekForecast: any = []
 
   //Turn time string into a weekday output
   const getWeekday = (dateFormat: any) => {
@@ -35,6 +36,10 @@ export const resolveForecastData = (forecast: Forecast) => {
   forecastData.forEach((data) => {
     const snapshot = {
       temp: data.main.temp + "°",
+      min: data.main.temp_min,
+      max: data.main.temp_max,
+      humidity: data.main.humidity,
+      wind: data.wind.speed,
       day: getWeekday(data.dt_txt),
       time: getTime(data.dt_txt),
       date: getDate(data.dt_txt),
@@ -42,6 +47,7 @@ export const resolveForecastData = (forecast: Forecast) => {
       desc: data.weather[0].description,
       icon: resolveWeatherIcon(data.weather[0].icon),
     }
+
     forecastList.push(snapshot)
   })
 
@@ -61,7 +67,7 @@ export const resolveForecastData = (forecast: Forecast) => {
   }
 
   //Groups array on date
-  const week = groupBy(resolveForecast.list, "date")
+  const week = groupBy(resolveForecast.list, "day")
 
-  return resolveForecast
+  return week
 }
