@@ -8,10 +8,9 @@ import getForecast from "../services/forecastService"
 
 //Material-UI
 import Card from "@mui/material/Card"
-import CardHeader from "@mui/material/CardHeader"
 import Chip from "@mui/material/Chip"
 import Divider from "@mui/material/Divider"
-import Typography from "@material-ui/core/Typography"
+import CircularProgress from "@mui/material/CircularProgress"
 
 //Components
 import WeatherContentSimple from "./WeatherContentSimple"
@@ -25,6 +24,7 @@ const WeatherCard = (city: any) => {
   const [isDataFound, setIsDataFound] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
   const [errorText, setErrorText] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   city = Object.values(city).toString()
 
@@ -35,14 +35,20 @@ const WeatherCard = (city: any) => {
   }, [city])
 
   const handleSearch = async (chosenCity: any) => {
+    setIsLoading(true)
+
     let weather = await getWeather(chosenCity)
+
     await handleForecast(chosenCity)
+
     setErrorText(chosenCity)
     setError(false)
     if (weather.data) {
+      setIsLoading(false)
       setWeather(weather.data)
       setIsDataFound(true)
     } else if (weather.error) {
+      setIsLoading(false)
       setIsDataFound(false)
       setError(true)
       console.error(weather.error)
@@ -62,27 +68,46 @@ const WeatherCard = (city: any) => {
     return <SnackBar open={error} text={city + " could not be found!"} />
   }
 
+  const loadingSize = "70%"
+
   return (
     <>
-      {isDataFound && (
+      {isLoading && (
         <>
           <Card
+            elevation={0}
             style={{
-              height: "fit-content",
-              alignContent: "left",
               width: "30em",
-              textAlign: "left",
-              backgroundColor: `rgb(255,255,255,0.9)`,
+              textAlign: "center",
+              backgroundColor: `rgb(255,255,255,0.0)`,
+              alignSelf: "flex-start",
+              marginTop: "10vh",
             }}
           >
-            <WeatherContentSimple weather={weather} />
-            <ForecastToday forecast={forecast} />
-            <Divider textAlign="left">
-              <Chip label="Forecast" />
-            </Divider>
-            <ForecastCard forecast={forecast} />
+            <CircularProgress
+              color={"success"}
+              style={{ width: loadingSize, height: loadingSize }}
+            ></CircularProgress>
           </Card>
         </>
+      )}
+      {!isLoading && isDataFound && (
+        <Card
+          style={{
+            height: "fit-content",
+            alignContent: "left",
+            width: "30em",
+            textAlign: "left",
+            backgroundColor: `rgb(255,255,255,0.9)`,
+          }}
+        >
+          <WeatherContentSimple weather={weather} />
+          <ForecastToday forecast={forecast} />
+          <Divider textAlign="left">
+            <Chip label="Forecast" />
+          </Divider>
+          <ForecastCard forecast={forecast} />
+        </Card>
       )}
       {error && handleError(city)}
     </>

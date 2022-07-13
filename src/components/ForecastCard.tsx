@@ -50,6 +50,14 @@ const ForecastCard = (forecast: any) => {
     }
   }
 
+  const checkLatestTime = (a: any) => {
+    const latestTime = a[a.length - 1].time
+
+    if (latestTime >= "12:00") {
+      return "12:00"
+    } else return a[a.length - 1].time
+  }
+
   const forecastTable = () => {
     return forecastList.map((a: any) => (
       <Grid
@@ -57,7 +65,7 @@ const ForecastCard = (forecast: any) => {
         xs={3}
         direction={"column"}
         key={a
-          .filter((time: any) => time.time == "12:00")
+          .filter((time: any) => time.time == checkLatestTime(a))
           .map((a: any) => a.key)}
       >
         <Card
@@ -67,10 +75,10 @@ const ForecastCard = (forecast: any) => {
         >
           <CardHeader
             title={a
-              .filter((time: any) => time.time == "12:00")
+              .filter((time: any) => time.time == checkLatestTime(a))
               .map((a: any) => a.day)}
             subheader={a
-              .filter((time: any) => time.time == "12:00")
+              .filter((time: any) => time.time == checkLatestTime(a))
               .map((a: any) => a.time)}
             style={{ paddingBottom: "0px" }}
           />
@@ -80,17 +88,17 @@ const ForecastCard = (forecast: any) => {
                 width: "2.5em",
               }}
               alt={a
-                .filter((time: any) => time.time == "12:00")
+                .filter((time: any) => time.time == checkLatestTime(a))
                 .map((a: any) => a.desc)}
               //className={classes.weatherIcon}
               src={a
-                .filter((time: any) => time.time == "12:00")
+                .filter((time: any) => time.time == checkLatestTime(a))
                 .map((a: any) => a.icon)}
             ></img>
           </CardContent>
           <CardContent>
             {a
-              .filter((time: any) => time.time == "12:00")
+              .filter((time: any) => time.time == checkLatestTime(a))
               .map((a: any) => a.temp)}
           </CardContent>
         </Card>
