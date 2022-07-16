@@ -1,10 +1,18 @@
 import { countries } from "country-data"
+import moment from "moment"
 
 export const resolveWeatherData = (weather: any) => {
   const weatherObject = weather.weather
 
   const capitalize = (str: any) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  const getTime = (timeData: any) => {
+    // split date in non-digit chaarcters
+
+    const time = moment(timeData).format("HH:mm")
+    return time
   }
 
   const resolveWeather = {
@@ -14,13 +22,15 @@ export const resolveWeatherData = (weather: any) => {
     tempMin: weatherObject.main.temp_min + "°",
     tempMax: weatherObject.main.temp_max + "°",
     feelsLike: weatherObject.main.feels_like + "°",
-    sunRise: weatherObject.sys.sunrise,
-    sunSet: weatherObject.sys.sunSet,
+    sunRise: getTime(weatherObject.sys.sunrise),
+    sunSet: getTime(weatherObject.sys.sunset),
     wind: weatherObject.wind.speed + "m/s",
     weatherIcon: resolveWeatherIcon(weatherObject.weather[0].icon),
     city: weatherObject.name,
     country: countries[weatherObject.sys.country].name,
     countryCode: weatherObject.sys.country,
+    riskOfRain: weatherObject.main.humidity >= 90,
+    humidity: weatherObject.main.humidity,
   }
 
   return resolveWeather

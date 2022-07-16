@@ -20,20 +20,25 @@ const WeatherContentSimple = (weather: any) => {
     tempMin,
     tempMax,
     feelsLike,
-    //sunRise,
-    //sunSet,
+    sunRise,
+    sunSet,
     weatherType,
-    //wind,
+    wind,
     weatherIcon,
     weatherDescription,
     city,
     country,
+    riskOfRain,
+    humidity,
     //countryCode,
   } = resolveWeatherData(weather)
 
   useEffect(() => {
     setWeatherType(weatherType)
   })
+
+  console.log(sunRise)
+  console.log(sunSet)
 
   return (
     <>
@@ -46,7 +51,8 @@ const WeatherContentSimple = (weather: any) => {
             </Typography>
             <Typography
               variant={"caption"}
-              style={{ marginLeft: "0.2em", paddingTop: "0.5vw" }}>
+              style={{ marginLeft: "0.2em", paddingTop: "0.5vw" }}
+            >
               {country}
             </Typography>
           </Grid>
@@ -55,9 +61,10 @@ const WeatherContentSimple = (weather: any) => {
       <CardContent>
         <Grid
           container
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'>
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Grid item style={{ display: "flex" }}>
             <Typography variant={"h2"}>{temp}</Typography>
             <Typography variant={"caption"}>
@@ -71,17 +78,41 @@ const WeatherContentSimple = (weather: any) => {
               }}
               alt={weatherDescription}
               //className={classes.weatherIcon}
-              src={weatherIcon}></img>
+              src={weatherIcon}
+            ></img>
           </Grid>
         </Grid>
+
         <Grid
           container
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'>
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Typography variant={"overline"}>Feels like {feelsLike}</Typography>
+
           <Typography variant={"overline"}>{weatherDescription}</Typography>
         </Grid>
+
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Typography variant={"overline"}>Humidity {humidity}</Typography>
+          <Typography variant={"overline"}>Wind {wind}</Typography>
+        </Grid>
+        {riskOfRain && (
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography variant={"overline"}>Big risk of rain</Typography>
+          </Grid>
+        )}
       </CardContent>
     </>
   )

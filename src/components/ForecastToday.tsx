@@ -42,7 +42,8 @@ const ForecastToday = (forecast: any) => {
               }}
               alt={a.desc}
               //className={classes.weatherIcon}
-              src={a.icon}></img>
+              src={a.icon}
+            ></img>
           </CardContent>
           <CardContent style={{ paddingTop: "0px" }}>{a.temp}</CardContent>
         </Card>
@@ -59,7 +60,8 @@ const ForecastToday = (forecast: any) => {
           height: "8.4em",
           flexGrow: 1,
           gridColumn: 1,
-        }}>
+        }}
+      >
         {todayWeather()}
       </Grid>
     </ScrollContainer>

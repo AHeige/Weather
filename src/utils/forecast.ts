@@ -44,6 +44,7 @@ export const resolveForecastData = (forecast: Forecast) => {
       min: data.main.temp_min,
       max: data.main.temp_max,
       humidity: data.main.humidity,
+      riskOfRain: data.main.humidity >= 90,
       wind: data.wind.speed,
       day: getWeekday(data.dt_txt),
       dayLong: getWeekdayLong(data.dt_txt),
