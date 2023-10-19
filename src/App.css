@@ -7,3 +7,21 @@ body {
   -webkit-font-smoothing: antialiased;
   margin: 0px;
 }
+
+.foreCastCard {
+  transition: all 300ms !important;
+  /* background: transparent !important; */
+}
+
+.foreCastCard:hover {
+  transition: all 300ms;
+  background: rgba(255, 255, 255, 1) !important;
+  z-index: 100;
+  cursor: pointer;
+  filter: grayscale(100%);
+  transform: translateY(8px);
+}
+
+.today:hover {
+  cursor: grab;
+}
