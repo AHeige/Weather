@@ -61,8 +61,13 @@ const ForecastCard = (forecast: any) => {
   }
 
   const styles = (i: number) => {
-    const activeCard = {
-      backgroundColor: detailElement && i === detailElement.index ? 'rgba(255,255,245,0.7)' : 'transparent',
+    let activeCard
+
+    if (detailElement && i === detailElement.index) {
+      activeCard = {
+        backgroundColor: 'rgba(255,240,240,0.7)',
+        borderTop: '4px solid rgba(255,215,215,1)',
+      }
     }
 
     return activeCard
