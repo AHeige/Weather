@@ -1,32 +1,35 @@
-import React, { useEffect, useState } from "react"
+import React, { SetStateAction, useEffect, useState } from 'react'
 
 //Constants import weatherData from "../constants/weatherTest"
 
 //Services
-import getWeather from "../services/weatherService"
-import getForecast from "../services/forecastService"
+import getWeather from '../services/weatherService'
+import getForecast from '../services/forecastService'
 
 //Material-UI
-import Card from "@mui/material/Card"
-import Chip from "@mui/material/Chip"
-import Divider from "@mui/material/Divider"
-import CircularProgress from "@mui/material/CircularProgress"
+import Card from '@mui/material/Card'
+import Chip from '@mui/material/Chip'
+import Divider from '@mui/material/Divider'
+import CircularProgress from '@mui/material/CircularProgress'
 
 //Components
-import WeatherContentSimple from "./WeatherContentSimple"
-import ForecastCard from "./ForecastCard"
-import ForecastToday from "./ForecastToday"
-import SnackBar from "./SnackBar"
+import WeatherContentSimple from './WeatherContentSimple'
+import ForecastCard from './ForecastCard'
+import ForecastToday from './ForecastToday'
+import SnackBar from './SnackBar'
+import { WeatherData } from '../interface/weatherData'
 
-const WeatherCard = (city: any) => {
-  const [weather, setWeather] = useState({})
+interface Props {
+  city: string | (string | null)[]
+  setWeatherType: React.Dispatch<SetStateAction<string>>
+}
+
+const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
+  const [weather, setWeather] = useState<WeatherData | undefined>()
   const [forecast, setForecast] = useState({})
-  const [isDataFound, setIsDataFound] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
-  const [errorText, setErrorText] = useState<string>("")
+  const [errorText, setErrorText] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  city = Object.values(city).toString()
 
   useEffect(() => {
     if (city) {
@@ -37,38 +40,32 @@ const WeatherCard = (city: any) => {
   const handleSearch = async (chosenCity: any) => {
     setIsLoading(true)
 
-    let weather = await getWeather(chosenCity)
+    await getWeather(chosenCity)
+      .then((response) => {
+        setWeather(response.data)
+        setWeatherType(response.data.weather[0].main)
 
-    await handleForecast(chosenCity)
-
-    setErrorText(chosenCity)
-    setError(false)
-    if (weather.data) {
-      setIsLoading(false)
-      setWeather(weather.data)
-      setIsDataFound(true)
-    } else if (weather.error) {
-      setIsLoading(false)
-      setIsDataFound(false)
-      setError(true)
-      console.error(weather.error)
-    }
-  }
-
-  const handleForecast = async (chosenCity: any) => {
-    let forecast = await getForecast(chosenCity)
-    if (forecast.data) {
-      setForecast(forecast.data)
-    } else if (forecast.error) {
-      console.error(forecast.error)
-    }
+        getForecast(chosenCity)
+          .then((response) => {
+            setForecast(response.data)
+            setIsLoading(false)
+          })
+          .catch((e) => {
+            console.error(e)
+          })
+      })
+      .catch(() => {
+        setIsLoading(false)
+        setError(true)
+        setErrorText(chosenCity)
+      })
   }
 
   const handleError = (city: any) => {
-    return <SnackBar open={error} text={city + " could not be found!"} />
+    return <SnackBar open={error} text={city + ' could not be found!'} />
   }
 
-  const loadingSize = "70%"
+  const loadingSize = '70%'
 
   return (
     <>
@@ -77,34 +74,31 @@ const WeatherCard = (city: any) => {
           <Card
             elevation={0}
             style={{
-              width: "30em",
-              textAlign: "center",
+              width: '30em',
+              textAlign: 'center',
               backgroundColor: `rgb(255,255,255,0.0)`,
-              alignSelf: "flex-start",
-              marginTop: "10vh",
+              alignSelf: 'flex-start',
+              marginTop: '10vh',
             }}
           >
-            <CircularProgress
-              color={"success"}
-              style={{ width: loadingSize, height: loadingSize }}
-            ></CircularProgress>
+            <CircularProgress color={'success'} style={{ width: loadingSize, height: loadingSize }}></CircularProgress>
           </Card>
         </>
       )}
-      {!isLoading && isDataFound && (
+      {!isLoading && weather && (
         <Card
           style={{
-            height: "fit-content",
-            alignContent: "left",
-            width: "30em",
-            textAlign: "left",
+            height: 'fit-content',
+            alignContent: 'left',
+            width: '30em',
+            textAlign: 'left',
             backgroundColor: `rgb(255,255,255,0.9)`,
           }}
         >
           <WeatherContentSimple weather={weather} />
           <ForecastToday forecast={forecast} />
-          <Divider textAlign="left">
-            <Chip label="Forecast" />
+          <Divider textAlign='left'>
+            <Chip label='Forecast' />
           </Divider>
           <ForecastCard forecast={forecast} />
         </Card>

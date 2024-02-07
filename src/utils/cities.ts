@@ -1,4 +1,4 @@
-type citiesData = {
+export interface CitiesData {
   features: [
     {
       place_name: string
@@ -6,12 +6,8 @@ type citiesData = {
   ]
 }
 
-export const resolveCitiesData = (citiesData: citiesData) => {
+export const resolveCitiesData = (citiesData: CitiesData) => {
   const cities = citiesData.features
 
-  const resolveCities = {
-    cities: cities.map((a) => a.place_name),
-  }
-
-  return resolveCities
+  return cities.map((a) => a.place_name)
 }

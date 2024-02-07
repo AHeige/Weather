@@ -1,25 +1,17 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from 'axios'
+import { WeatherData } from '../interface/weatherData'
 
-import { token } from "../config";
-
-const getWeather = async (city: string) => {
-  let status;
-  let data;
-  let error;
-
-  await axios
-    .get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${token}&units=metric`
-    )
-    .then((response: AxiosResponse<any>) => {
-      data = response.data;
-      status = response.status;
+const getWeather = async (city: string): Promise<AxiosResponse<WeatherData>> => {
+  const response = await axios
+    .get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_TOKEN}&units=metric`)
+    .then((response: AxiosResponse<WeatherData>) => {
+      return response
     })
     .catch((err) => {
-      error = err;
-    });
+      throw new Error(err)
+    })
 
-  return { status, data, error };
-};
+  return response
+}
 
-export default getWeather;
+export default getWeather
