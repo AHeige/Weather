@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from "react";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
-import Slide, { SlideProps } from "@mui/material/Slide";
+import React, { SetStateAction, useEffect, useState } from 'react'
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
+import Slide, { SlideProps } from '@mui/material/Slide'
 
-const SnackBar = (info: any) => {
-  const [error, setError] = useState<boolean>(info.open);
+interface Props {
+  open: boolean
+  setError: React.Dispatch<SetStateAction<boolean>>
+  info: string
+}
 
-  useEffect(() => {
-    setError(true);
-    setTimeout(() => {
-      setError(false);
-    }, 6000);
-  }, [open]);
-
+const SnackBar: React.FC<Props> = ({ open, setError, info }) => {
   const TransitionDown = (props: any) => {
-    return <Slide {...props} direction="left" />;
-  };
+    return <Slide {...props} direction='left' />
+  }
+
+  setTimeout(() => {
+    setError(false)
+  }, 5000)
 
   return (
-    <Snackbar
-      open={error}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      TransitionComponent={TransitionDown}
-    >
-      <Alert severity="error" sx={{ width: "100%" }}>
-        {info.text}
+    <Snackbar open={open} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} TransitionComponent={TransitionDown}>
+      <Alert severity='error' sx={{ width: '100%' }}>
+        {info}
       </Alert>
     </Snackbar>
-  );
-};
+  )
+}
 
-export default SnackBar;
+export default SnackBar

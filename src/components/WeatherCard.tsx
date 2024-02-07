@@ -28,7 +28,6 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
   const [weather, setWeather] = useState<WeatherData | undefined>()
   const [forecast, setForecast] = useState({})
   const [error, setError] = useState<boolean>(false)
-  const [errorText, setErrorText] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
@@ -39,6 +38,7 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
 
   const handleSearch = async (chosenCity: any) => {
     setIsLoading(true)
+    setError(false)
 
     await getWeather(chosenCity)
       .then((response) => {
@@ -57,12 +57,11 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
       .catch(() => {
         setIsLoading(false)
         setError(true)
-        setErrorText(chosenCity)
       })
   }
 
   const handleError = (city: any) => {
-    return <SnackBar open={error} text={city + ' could not be found!'} />
+    return <SnackBar open={error} setError={setError} info={city + ' could not be found!'} />
   }
 
   const loadingSize = '70%'
