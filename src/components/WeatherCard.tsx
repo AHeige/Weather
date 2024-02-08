@@ -33,12 +33,6 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
   const [error, setError] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (city) {
-      handleSearch(city)
-    }
-  }, [city])
-
   const handleSearch = async (chosenCity: any) => {
     setIsLoading(true)
     setError(false)
@@ -57,6 +51,12 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
       console.error(error)
     }
   }
+  useEffect(() => {
+    if (city) {
+      handleSearch(city)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [city])
 
   const handleError = (city: any) => {
     return <SnackBar open={error} setError={setError} info={city + ' could not be found!'} />

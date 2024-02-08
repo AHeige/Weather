@@ -39,7 +39,7 @@ export const resolveForecastData = (forecast: ForecastData) => {
   }
 
   forecastData.forEach((data) => {
-    const snapshot = {
+    forecastList.push({
       temp: data.main.temp + '°',
       min: data.main.temp_min,
       max: data.main.temp_max,
@@ -53,9 +53,7 @@ export const resolveForecastData = (forecast: ForecastData) => {
       key: data.dt,
       desc: data.weather[0].description,
       icon: resolveWeatherIcon(data.weather[0].icon),
-    }
-
-    forecastList.push(snapshot)
+    })
   })
 
   //Groups array on date

@@ -1,7 +1,7 @@
-import React, { SetStateAction, useEffect, useState } from 'react'
+import React, { SetStateAction } from 'react'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
-import Slide, { SlideProps } from '@mui/material/Slide'
+import Slide from '@mui/material/Slide'
 
 interface Props {
   open: boolean

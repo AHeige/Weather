@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from 'react'
+import React, { SetStateAction, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 //Services
@@ -49,9 +49,10 @@ interface Props {
 
 const CitySearch: React.FC<Props> = ({ setCity }) => {
   const classes = useStyles()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const [cities, setCities] = useState<any>([])
+  const [cities, setCities] = useState<string[]>([])
   const [error, setError] = useState<boolean>(false)
 
   const handleCitySearch = (search: any) => {
@@ -63,14 +64,12 @@ const CitySearch: React.FC<Props> = ({ setCity }) => {
       return
     }
 
-    await getCity(search)
-      .then((response) => {
-        const cities = resolveCitiesData(response.data)
-        setCities(cities)
-      })
-      .catch(() => {
-        setError(true)
-      })
+    try {
+      const response = await getCity(search)
+      setCities(resolveCitiesData(response.data))
+    } catch (error) {
+      setError(true)
+    }
   }
 
   const handleChosenCity = (value: any) => {
@@ -86,7 +85,7 @@ const CitySearch: React.FC<Props> = ({ setCity }) => {
       <Autocomplete
         renderInput={(params) => <TextField error={error} helperText={error ? 'No city found' : ''} {...params} placeholder='Search any city' />}
         options={cities}
-        onInputChange={(e, value) => handleCitySearch(value)}
+        onInputChange={(e, value: string) => handleCitySearch(value)}
         onChange={(e, value) => handleChosenCity(value)}
         classes={{ inputRoot: classes.inputRoot }}
       />

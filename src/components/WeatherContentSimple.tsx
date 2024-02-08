@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 
 //Material-ui
 import Grid from '@mui/material/Grid'
@@ -20,9 +20,6 @@ const WeatherContentSimple: React.FC<Props> = ({ weather }) => {
     tempMin,
     tempMax,
     feelsLike,
-    sunRise,
-    sunSet,
-    weatherType,
     wind,
     weatherIcon,
     weatherDescription,

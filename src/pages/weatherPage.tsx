@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
@@ -24,7 +24,6 @@ const WeatherPage = () => {
 
   const [appBarHeight, setAppBarHeight] = useState<number>()
   const [city, setCity] = useState<string | (string | null)[] | null>(citySearched)
-  const [history, setHistory] = useState<string[]>([])
 
   const appBarRef: any = useRef()
 
@@ -33,17 +32,6 @@ const WeatherPage = () => {
 
     setAppBarHeight(appBarHeight + 20)
   }, [appBarRef])
-
-  useEffect(() => {
-    if (city) {
-      handleHistory(city)
-      localStorage.setItem('lastSearch', city.toString())
-    }
-  }, [city])
-
-  const handleHistory = (c: any) => {
-    setHistory((history) => [...history, c])
-  }
 
   return (
     <Grid
