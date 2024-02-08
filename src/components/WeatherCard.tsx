@@ -15,9 +15,12 @@ import CircularProgress from '@mui/material/CircularProgress'
 //Components
 import WeatherContentSimple from './WeatherContentSimple'
 import ForecastCard from './ForecastCard'
-import ForecastToday from './ForecastToday'
 import SnackBar from './SnackBar'
+
+//Interfaces
 import { WeatherData } from '../interface/weatherData'
+import { ForecastData } from '../interface/forecast'
+import WeatherToday from './WeatherToday'
 
 interface Props {
   city: string | (string | null)[]
@@ -26,7 +29,7 @@ interface Props {
 
 const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
   const [weather, setWeather] = useState<WeatherData | undefined>()
-  const [forecast, setForecast] = useState({})
+  const [forecast, setForecast] = useState<ForecastData>()
   const [error, setError] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -40,24 +43,19 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
     setIsLoading(true)
     setError(false)
 
-    await getWeather(chosenCity)
-      .then((response) => {
-        setWeather(response.data)
-        setWeatherType(response.data.weather[0].main)
-
-        getForecast(chosenCity)
-          .then((response) => {
-            setForecast(response.data)
-            setIsLoading(false)
-          })
-          .catch((e) => {
-            console.error(e)
-          })
-      })
-      .catch(() => {
-        setIsLoading(false)
-        setError(true)
-      })
+    //New logic
+    try {
+      const weather = await getWeather(chosenCity)
+      const forecast = await getForecast(chosenCity)
+      setWeather(weather.data)
+      setWeatherType(weather.data.weather[0].main)
+      setForecast(forecast.data)
+      setIsLoading(false)
+    } catch (error) {
+      setError(true)
+      setIsLoading(false)
+      console.error(error)
+    }
   }
 
   const handleError = (city: any) => {
@@ -84,7 +82,7 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
           </Card>
         </>
       )}
-      {!isLoading && weather && (
+      {!isLoading && weather && forecast && (
         <Card
           style={{
             height: 'fit-content',
@@ -95,7 +93,7 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
           }}
         >
           <WeatherContentSimple weather={weather} />
-          <ForecastToday forecast={forecast} />
+          <WeatherToday forecast={forecast} />
           <Divider textAlign='left'>
             <Chip label='Forecast' />
           </Divider>

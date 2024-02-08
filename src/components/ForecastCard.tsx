@@ -10,46 +10,29 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import Chip from '@mui/material/Chip'
-import Divider from '@mui/material/Divider'
+import { ForeCastDay, ForecastData } from '../interface/forecast'
+import ForecastChosenDay from './ForecastChosenDay'
 
-const ForecastCard = (forecast: any) => {
-  const list = resolveForecastData(forecast)
-  const [detailElement, setDetailElement] = useState<any>()
+interface Props {
+  forecast: ForecastData
+}
 
-  const forecastList = Object.values(list)
+interface DetailedElement {
+  index: number
+  day: ForeCastDay[]
+}
 
-  const shifted = forecastList.shift()
+const ForecastCard: React.FC<Props> = ({ forecast }) => {
+  const resolvedForecastData = resolveForecastData(forecast)
+  const [detailElement, setDetailElement] = useState<DetailedElement>()
 
-  const clicked = (element: any, i: number) => {
+  const clicked = (day: ForeCastDay[], i: number) => {
     const detailed = {
       index: i,
-      element: element,
+      day: day,
     }
 
     setDetailElement(detailed)
-  }
-
-  const details = () => {
-    if (detailElement) {
-      return detailElement.element.map((a: any) => (
-        <Grid item xs={3} direction={'column'} key={a.key}>
-          <Card elevation={1} style={{ backgroundColor: `rgb(255,255,255, 0)` }}>
-            <CardHeader subheader={a.time} style={{ paddingBottom: '0px' }} />
-            <CardContent style={{ paddingTop: '0px', paddingBottom: '0px' }}>
-              <img
-                style={{
-                  width: '2.5em',
-                }}
-                alt={a.desc}
-                //className={classes.weatherIcon}
-                src={a.icon}
-              ></img>
-            </CardContent>
-            <CardContent>{a.temp}</CardContent>
-          </Card>
-        </Grid>
-      ))
-    }
   }
 
   const checkLatestTime = (a: any) => {
@@ -74,12 +57,19 @@ const ForecastCard = (forecast: any) => {
   }
 
   const forecastTable = () => {
-    return forecastList.map((a: any, i: number) => (
-      <Grid item xs={3} direction={'column'} key={a.filter((time: any) => time.time == checkLatestTime(a)).map((a: any) => a.key)}>
+    function getIcon(a: ForeCastDay[]): string {
+      const latestTime = checkLatestTime(a)
+      const latestDay = a.find((day) => day.time === latestTime)
+
+      return latestDay ? latestDay.icon : ''
+    }
+
+    return Object.values(resolvedForecastData).map((a, i: number) => (
+      <Grid item xs={3} key={i}>
         <Card style={styles(i)} elevation={1} onClick={() => clicked(a, i)} className='foreCastCard'>
           <CardHeader
-            title={a.filter((time: any) => time.time == checkLatestTime(a)).map((a: any) => a.day)}
-            subheader={a.filter((time: any) => time.time == checkLatestTime(a)).map((a: any) => a.time)}
+            title={a.filter((time: any) => time.time === checkLatestTime(a)).map((a: any) => a.day)}
+            subheader={a.filter((time: any) => time.time === checkLatestTime(a)).map((a: any) => a.time)}
             style={{ paddingBottom: '0px' }}
           />
           <CardContent style={{ paddingTop: '0px', paddingBottom: '0px' }}>
@@ -87,12 +77,12 @@ const ForecastCard = (forecast: any) => {
               style={{
                 width: '2.5em',
               }}
-              alt={a.filter((time: any) => time.time == checkLatestTime(a)).map((a: any) => a.desc)}
+              alt={''}
               //className={classes.weatherIcon}
-              src={a.filter((time: any) => time.time == checkLatestTime(a)).map((a: any) => a.icon)}
+              src={getIcon(a).toString()}
             ></img>
           </CardContent>
-          <CardContent>{a.filter((time: any) => time.time == checkLatestTime(a)).map((a: any) => a.temp)}</CardContent>
+          <CardContent>{a.filter((time: any) => time.time === checkLatestTime(a)).map((a: any) => a.temp)}</CardContent>
         </Card>
       </Grid>
     ))
@@ -118,7 +108,7 @@ const ForecastCard = (forecast: any) => {
             <Chip label={detailElement.element[0].dayLong} style={{ backgroundColor: 'rgb(218,218,218,1)', position: 'relative' }} />
           </Divider> */}
           <ScrollContainer horizontal hideScrollbars>
-            <Chip label={detailElement.element[0].dayLong} style={{ marginLeft: '4.2em', backgroundColor: 'rgb(218,218,218,1)', position: 'relative' }} />
+            <Chip label={detailElement.day[0].dayLong} style={{ marginLeft: '4.2em', backgroundColor: 'rgb(218,218,218,1)', position: 'relative' }} />
 
             <Grid
               // className='today'
@@ -131,7 +121,7 @@ const ForecastCard = (forecast: any) => {
                 marginTop: '-1em',
               }}
             >
-              {details()}
+              <ForecastChosenDay day={detailElement.day} />
             </Grid>
           </ScrollContainer>
         </div>

@@ -3,11 +3,11 @@ import moment from 'moment'
 import { WeatherData } from '../interface/weatherData'
 
 export const resolveWeatherData = (weatherData: WeatherData) => {
-  const capitalize = (str: any) => {
+  const capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  const getTime = (timeData: any) => {
+  const getTime = (timeData: number) => {
     // split date in non-digit chaarcters
 
     const time = moment(timeData).format('HH:mm')
@@ -57,7 +57,11 @@ export const resolveWeatherIcon = (icon: string) => {
 
   const iconImgType = '.png'
 
-  const iconList: any = {
+  interface IconList {
+    [key: string]: string
+  }
+
+  const iconList: IconList = {
     '01d': '01d@2x',
     '02d': '02d@2x',
     '03d': '03d@2x',
