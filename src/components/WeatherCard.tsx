@@ -19,8 +19,9 @@ import SnackBar from './SnackBar'
 
 //Interfaces
 import { WeatherData } from '../interface/weatherData'
-import { ForecastData } from '../interface/forecast'
+import { ForeCastTime, ForecastData } from '../interface/forecast'
 import WeatherToday from './WeatherToday'
+import { resolveForecastData } from '../utils/forecast'
 
 interface Props {
   city: string | (string | null)[]
@@ -64,6 +65,12 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
 
   const loadingSize = '70%'
 
+  function getToday(fc: ForecastData): ForeCastTime[] {
+    const resolved = resolveForecastData(fc)
+
+    return Object.values(resolved)[0]
+  }
+
   return (
     <>
       {isLoading && (
@@ -93,7 +100,7 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
           }}
         >
           <WeatherContentSimple weather={weather} />
-          <WeatherToday forecast={forecast} />
+          <WeatherToday forecast={getToday(forecast)} />
           <Divider textAlign='left'>
             <Chip label='Forecast' />
           </Divider>

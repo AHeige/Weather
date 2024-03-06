@@ -1,8 +1,8 @@
 import { Grid, Card, CardHeader, CardContent } from '@mui/material'
-import { ForeCastDay } from '../interface/forecast'
+import { ForeCastTime } from '../interface/forecast'
 
 interface Props {
-  day: ForeCastDay[]
+  day: ForeCastTime[]
 }
 
 const ForecastChosenDay: React.FC<Props> = ({ day }) => {

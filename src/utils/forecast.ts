@@ -1,12 +1,16 @@
-import { ForeCastDay, ForecastData } from '../interface/forecast'
+import { ForeCastTime, ForecastData } from '../interface/forecast'
 import { groupBy } from './arrayUtils'
 import { resolveWeatherIcon } from './weather'
 import moment from 'moment'
 
-export const resolveForecastData = (forecast: ForecastData) => {
+export interface Week {
+  [key: string]: ForeCastTime[]
+}
+
+export const resolveForecastData = (forecast: ForecastData): Week => {
   const forecastData = forecast.list
 
-  let forecastList: ForeCastDay[] = []
+  let forecastList: ForeCastTime[] = []
 
   //Turn time string into a weekday output
   const getWeekday = (dateFormat: any) => {

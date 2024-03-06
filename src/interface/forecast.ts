@@ -35,7 +35,7 @@ export interface ForecastData {
   ]
 }
 
-export interface ForeCastDay {
+export interface ForeCastTime {
   temp: string
   min: number
   max: number

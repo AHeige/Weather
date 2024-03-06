@@ -10,7 +10,7 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import Chip from '@mui/material/Chip'
-import { ForeCastDay, ForecastData } from '../interface/forecast'
+import { ForeCastTime, ForecastData } from '../interface/forecast'
 import ForecastChosenDay from './ForecastChosenDay'
 
 interface Props {
@@ -19,28 +19,20 @@ interface Props {
 
 interface DetailedElement {
   index: number
-  day: ForeCastDay[]
+  day: ForeCastTime[]
 }
 
 const ForecastCard: React.FC<Props> = ({ forecast }) => {
   const resolvedForecastData = resolveForecastData(forecast)
   const [detailElement, setDetailElement] = useState<DetailedElement>()
 
-  const clicked = (day: ForeCastDay[], i: number) => {
+  const clicked = (day: ForeCastTime[], i: number) => {
     const detailed = {
       index: i,
       day: day,
     }
 
     setDetailElement(detailed)
-  }
-
-  const checkLatestTime = (a: any) => {
-    const latestTime = a[a.length - 1].time
-
-    if (latestTime >= '12:00') {
-      return '12:00'
-    } else return a[a.length - 1].time
   }
 
   const styles = (i: number) => {
@@ -57,21 +49,10 @@ const ForecastCard: React.FC<Props> = ({ forecast }) => {
   }
 
   const forecastTable = () => {
-    function getIcon(a: ForeCastDay[]): string {
-      const latestTime = checkLatestTime(a)
-      const latestDay = a.find((day) => day.time === latestTime)
-
-      return latestDay ? latestDay.icon : ''
-    }
-
-    return Object.values(resolvedForecastData).map((a, i: number) => (
+    return Object.values(resolvedForecastData).map((day, i: number) => (
       <Grid item xs={3} key={i}>
-        <Card style={styles(i)} elevation={1} onClick={() => clicked(a, i)} className='foreCastCard'>
-          <CardHeader
-            title={a.filter((time: any) => time.time === checkLatestTime(a)).map((a: any) => a.day)}
-            subheader={a.filter((time: any) => time.time === checkLatestTime(a)).map((a: any) => a.time)}
-            style={{ paddingBottom: '0px' }}
-          />
+        <Card style={styles(i)} elevation={1} onClick={() => clicked(day, i)} className='foreCastCard'>
+          <CardHeader title={day[0].day} subheader={day[day.length - 1].time} style={{ paddingBottom: '0px' }} />
           <CardContent style={{ paddingTop: '0px', paddingBottom: '0px' }}>
             <img
               style={{
@@ -79,10 +60,10 @@ const ForecastCard: React.FC<Props> = ({ forecast }) => {
               }}
               alt={''}
               //className={classes.weatherIcon}
-              src={getIcon(a).toString()}
+              src={day[day.length - 1].icon}
             ></img>
           </CardContent>
-          <CardContent>{a.filter((time: any) => time.time === checkLatestTime(a)).map((a: any) => a.temp)}</CardContent>
+          <CardContent>{day[day.length - 1].temp}</CardContent>
         </Card>
       </Grid>
     ))
