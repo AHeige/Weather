@@ -1,9 +1,6 @@
 import React from 'react'
 import ScrollContainer from 'react-indiana-drag-scroll'
 
-//utils
-import { resolveForecastData } from '../utils/forecast'
-
 //components
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
