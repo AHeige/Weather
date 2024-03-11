@@ -7,9 +7,6 @@ import CitySearch from '../components/CitySearch'
 import WeatherCard from '../components/WeatherCard'
 import Mountains from '../assets/mountains.svg'
 
-//Utils
-import weatherImg from '../utils/weatherImg'
-
 //Material-UI
 import Grid from '@mui/material/Grid'
 import AppBar from '@mui/material/AppBar'

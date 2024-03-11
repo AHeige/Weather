@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 //Constants import weatherData from "../constants/weatherTest"
 
