@@ -13,11 +13,12 @@ import weatherImg from '../utils/weatherImg'
 //Material-UI
 import Grid from '@mui/material/Grid'
 import AppBar from '@mui/material/AppBar'
+import getImage from '../services/imageService'
 
 //Services
 
 const WeatherPage = () => {
-  const [weatherType, setWeatherType] = useState<string>('')
+  const [cityImage, setCityImage] = useState<string | (string | null)[] | null>(Mountains)
 
   const { search } = useLocation()
   const { citySearched } = queryString.parse(search)
@@ -33,11 +34,19 @@ const WeatherPage = () => {
     setAppBarHeight(appBarHeight + 20)
   }, [appBarRef])
 
+  useEffect(() => {
+    if (city) {
+      getImage(city).then((url) => {
+        setCityImage(url)
+      })
+    }
+  }, [city])
+
   return (
     <Grid
       container
       style={{
-        backgroundImage: weatherType ? `url(${weatherImg(weatherType)})` : `url(${Mountains})`,
+        backgroundImage: `url(${cityImage})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -73,7 +82,7 @@ const WeatherPage = () => {
           //backgroundImage: `url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*)`,
         }}
       >
-        {city && <WeatherCard city={city} setWeatherType={setWeatherType} />}
+        {city && <WeatherCard city={city} />}
       </Grid>
     </Grid>
   )

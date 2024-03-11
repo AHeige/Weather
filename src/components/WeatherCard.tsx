@@ -25,10 +25,9 @@ import { resolveForecastData } from '../utils/forecast'
 
 interface Props {
   city: string | (string | null)[]
-  setWeatherType: React.Dispatch<SetStateAction<string>>
 }
 
-const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
+const WeatherCard: React.FC<Props> = ({ city }) => {
   const [weather, setWeather] = useState<WeatherData | undefined>()
   const [forecast, setForecast] = useState<ForecastData>()
   const [error, setError] = useState<boolean>(false)
@@ -43,7 +42,7 @@ const WeatherCard: React.FC<Props> = ({ city, setWeatherType }) => {
       const weather = await getWeather(chosenCity)
       const forecast = await getForecast(chosenCity)
       setWeather(weather.data)
-      setWeatherType(weather.data.weather[0].main)
+
       setForecast(forecast.data)
       setIsLoading(false)
     } catch (error) {
